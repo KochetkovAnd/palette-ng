@@ -1,0 +1,59 @@
+$Light_shades: #FAFBF8;
+$Light_accent: #B5BCC2;
+$Main_brand_color:#9DA7B3;
+$Dark_accent:#6AB3EF;
+$Dark_shades:#386FD2;
+
+$border_radius: 10px;
+
+.back {
+    width: 100%;
+    height: 100vh;
+    background-color: $Dark_shades;
+    position: relative;
+}
+
+.login-block {    
+    position: absolute;  
+    margin: 25vh 5%;
+    padding: 10px;  
+    width: 40%;
+    height: 50vh;
+    border-radius: $border_radius;
+    background-color: $Light_shades;
+}
+
+.title {
+    text-align: center;
+    margin-top: 10vh;
+    font-size: 4vh;
+    font-weight: 700;
+}
+
+input {    
+    border: $border_radius;  
+    font-size: 2.5vh;
+    outline: none;  
+    width: calc(80% - 30px);    
+    margin: 4vh 10%;
+    border-bottom: 2px solid $Light_accent;
+    transition: 0.3s ease-in-out;
+    padding: 0px 15px; 
+    background-color: transparent;   
+}
+
+input:focus {
+    transition: 0.3s ease-in-out;
+    border-bottom: 2px solid $Main_brand_color;
+}
+
+button {
+    width: 30%;
+    margin: 0px 35%;
+    font-size: 2.75vh;
+    font-weight: 500;
+    padding: 15px;
+    border-radius: $border_radius;
+    border: none;
+    background-color: $Dark_accent;
+}
