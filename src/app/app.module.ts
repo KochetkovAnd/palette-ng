@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginBlockComponent } from './components/login-block/login-block.component';
 import { PalettePageComponent } from './pages/palette-page/palette-page.component';
+import { NavbarUserComponent } from './components/navbar-user/navbar-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginBlockComponent,
-    PalettePageComponent
+    PalettePageComponent,
+    NavbarUserComponent
   ],
   imports: [
     BrowserModule,

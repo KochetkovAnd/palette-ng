@@ -1,0 +1,84 @@
+$Light_shades: #FAFBF8;
+$Light_accent: #B5BCC2;
+$Main_brand_color:#9DA7B3;
+$Dark_accent:#6AB3EF;
+$Dark_shades:#386FD2;
+
+$border_radius: 10px;
+
+$default_transition: 0.3s ease-in-out;
+
+nav {
+    position: fixed;
+    width: 100%;
+    height: 70px;
+    left: 0%;
+    top: 0%;
+    background-color: $Main_brand_color;
+}
+
+nav ul {
+    list-style: none;
+    position: relative;
+}
+
+nav ul li {
+    width: 200px;
+    float: left;
+}
+
+.default_text {
+    display: block;
+    color: $Light_shades;
+    line-height: 50px;
+    margin: 10px;
+    text-align: center;
+    font-size: 18px;
+    border-radius: $border_radius;
+    background-color:$Main_brand_color;
+    transition: $default_transition;
+    font-weight: 500;
+    
+}
+
+.default_text:hover {
+    background-color: $Light_accent;
+    transition: $default_transition;
+    cursor: default;
+}
+
+.img-box {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    background-color: $Main_brand_color;
+    border-radius: $border_radius;
+}
+
+.img-box:hover {
+    background-color: $Light_accent;
+    transition: $default_transition;
+}
+
+.img-box a {
+    display: block;
+    color: $Light_shades;
+    line-height: 50px;
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: default;
+}
+
+img {
+    margin: 5px;
+    width: 30px;
+    height: 40px;
+    border-radius: $border_radius;
+    object-fit: contain;
+}
+
+.placeholder {
+    width: 100%;
+    height: 70px;
+}
