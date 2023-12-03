@@ -19,12 +19,22 @@ export class LoginBlockComponent {
     private router: Router
   ) { }
 
+  ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      if (this.authService.getRole() == "USER") {
+        this.router.navigate(['/palettes'])
+      }      
+    }
+  }
+
   async login() {
     console.log("я начал")
     let response = await lastValueFrom(this.httpService.login(this.username, this.password))
     if (response.token) {
       this.authService.login(response.token, response.role)
-      this.router.navigate(['/test'])      
+      if (response.role == "USER") {
+        this.router.navigate(['/palettes'])
+      }            
     } else {
       console.log("неправильный пароль")
     }

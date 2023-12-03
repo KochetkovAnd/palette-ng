@@ -6,13 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { LoginBlockComponent } from './components/login-block/login-block.component';
-import { TestComponent } from './components/test/test.component';
+import { PalettePageComponent } from './pages/palette-page/palette-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginBlockComponent,
-    TestComponent
+    PalettePageComponent
   ],
   imports: [
     BrowserModule,
