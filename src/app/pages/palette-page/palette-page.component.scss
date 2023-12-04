@@ -1,25 +1,26 @@
-.test {
-    width: 500px;
-    height: 500px;
-    background-color: black;
+.container {
+  width: 100%;
+  display: grid;  
+}
+palette-item {
+  margin: 20px;
+  height: 150px;  
 }
 
-@media (min-width: 1200px) {
-    .test {
-        background-color: red;
-    }
+@media (min-width: 1750px) {
+  .container {
+    grid-template-columns: repeat(4, 25%);
   }
-  
-  /* Для экранов шире 768px и меньше или равно 1200px */
-  @media (min-width: 768px) and (max-width: 1200px) {
-    .test {
-        background-color: green;
-    }
+}
+
+@media (min-width: 1000px) and (max-width: 1750px){
+  .container {
+    grid-template-columns: repeat(3, calc(100% / 3));
   }
-  
-  /* Для экранов меньше или равно 768px */
-  @media (max-width: 768px) {
-    .test {
-        background-color: blue;
-    }
+}
+
+@media (max-width: 1000px){
+  .container {
+    grid-template-columns: repeat(2, 50%);
   }
+}

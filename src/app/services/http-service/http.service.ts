@@ -4,6 +4,7 @@ import { AuthService } from '../auth-service/auth.service';
 import { RegisterUser } from '../../models/registerUser';
 import { Observable, catchError, of } from 'rxjs';
 import { User } from '../../models/user';
+import { Palette } from '../../models/palette';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,11 @@ export class HttpService {
     .pipe(catchError((error: any, caught: Observable<any>): Observable<any> => {
       return of(error);
     }))
+  }
+
+
+  getAvailablePalettes() {
+    return this.http.get<Palette[]>(this.baseURL + "/palette/available_palettes",
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   }
 }

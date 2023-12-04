@@ -28,7 +28,6 @@ export class LoginBlockComponent {
   }
 
   async login() {
-    console.log("я начал")
     let response = await lastValueFrom(this.httpService.login(this.username, this.password))
     if (response.token) {
       this.authService.login(response.token, response.role)

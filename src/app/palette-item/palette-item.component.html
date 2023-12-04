@@ -1,0 +1,18 @@
+<div class="card" *ngIf="palette">
+    <div class="color-part" [ngStyle]="getLastColor()">
+        <div class="color"
+            *ngFor="let paletteColor of palette.paletteColors; let i = index"
+            [ngStyle]="getStyle(paletteColor, i)"
+            (mouseenter) = "onMouseEnter(i)"
+            (mouseleave) = "onMouseLeave()"
+        > <a *ngIf ="i == hoveredIndex" [ngStyle]="getTextColor(paletteColor.color.hex)"> {{paletteColor.color.hex}}</a>
+        </div>
+    </div>
+    <div class="name-part">
+        <a class="name">{{palette.name}}</a>
+        <img src="assets/dots.png">
+    </div>
+
+
+    <!-- {{palette.name}} -->
+</div>
