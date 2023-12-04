@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { LoginBlockComponent } from './components/login-block/login-block.component';
 import { PalettePageComponent } from './pages/palette-page/palette-page.component';
 import { NavbarUserComponent } from './components/navbar-user/navbar-user.component';
-import { PaletteItemComponent } from './palette-item/palette-item.component';
+import { PaletteItemComponent } from './components/palette-item/palette-item.component';
 
 @NgModule({
   declarations: [

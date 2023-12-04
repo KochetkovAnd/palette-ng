@@ -1,5 +1,4 @@
-export interface Tag {
-    id: number,
+export interface Tag {    
     name: string,
     description: string
 }

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Palette } from '../models/palette';
-import { PaletteColor } from '../models/paletteColor';
+import { Palette } from '../../models/palette';
+import { ColorInPalette } from '../../models/colorInPalette';
 
 @Component({
   selector: 'palette-item',
@@ -12,15 +12,15 @@ export class PaletteItemComponent {
 
   hoveredIndex: number | null = null
 
-  getStyle(paletteColor: PaletteColor, index: number): {[key:string] : string } {
+  getStyle(colorInPalette: ColorInPalette, index: number): {[key:string] : string } {
     
     let width = "20%"
 
     if (this.palette) {
-      const baseWidth = 100 / this.palette.paletteColors.length
+      const baseWidth = 100 / this.palette.colorInPalettes.length
       if (this.hoveredIndex !== null) {
         if (this.hoveredIndex !== index) {
-          width = `calc(${baseWidth}% - (100px / ${this.palette.paletteColors.length - 1}))`
+          width = `calc(${baseWidth}% - (100px / ${this.palette.colorInPalettes.length - 1}))`
         } else {
           width = `calc(${baseWidth}% + 100px)`
         }
@@ -32,7 +32,7 @@ export class PaletteItemComponent {
     
     
     return {
-      'background-color': "#" + paletteColor.color.hex,
+      'background-color': "#" + colorInPalette.hex,
       'width': width,
       'transition': 'width 0.3s ease-in-out'
       
@@ -51,7 +51,7 @@ export class PaletteItemComponent {
   getLastColor() {
     if (this.palette) {
       return {
-        'background-color': "#" + this.palette?.paletteColors[this.palette.paletteColors.length - 1].color.hex,
+        'background-color': "#" + this.palette?.colorInPalettes[this.palette.colorInPalettes.length - 1].hex,
       }
     }
     return {}    

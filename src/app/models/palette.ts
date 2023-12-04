@@ -1,4 +1,4 @@
-import { PaletteColor } from "./paletteColor";
+import { ColorInPalette } from "./colorInPalette";
 import { Tag } from "./tag";
 import { User } from "./user";
 
@@ -9,5 +9,5 @@ export interface Palette {
     modelType: string,
     creator: User,
     tags: Tag[],
-    paletteColors: PaletteColor[]
+    colorInPalettes: ColorInPalette[]
 }
