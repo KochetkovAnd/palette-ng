@@ -2,12 +2,13 @@
 <nav>
     <ul>
         <li style="width: 200px;">
-            <div class="img-box">
+            <div class="img-box" routerLink="/generate_pallete">
                 <img src="assets/logo2.png">
                 <a>Colorhythm</a>
             </div>            
         </li>
-        <li><a class="default_text">Палитры</a></li>      
+        <li><a class="default_text" routerLink="/generate_pallete">Генерация</a></li>
+        <li><a class="default_text" routerLink="/palettes">Палитры</a></li>         
         <li style="float: right;" (click)="exit()"><a class="default_text">Выход</a></li> 
     </ul>
 </nav>

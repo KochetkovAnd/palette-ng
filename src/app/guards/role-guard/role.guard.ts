@@ -16,7 +16,13 @@ class PermissionService {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.authService.isLoggedIn()) {
       let role = this.authService.getRole()
-      return true
+      let isUser = role == "USER"
+      switch (next.routeConfig?.path) {
+        case 'palettes':
+          return isUser
+        case 'generate_pallete':
+          return isUser
+      }
     }
     this.router.navigate(['/login'])
     return false

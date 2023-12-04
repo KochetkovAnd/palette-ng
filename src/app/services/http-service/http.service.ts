@@ -5,6 +5,7 @@ import { RegisterUser } from '../../models/registerUser';
 import { Observable, catchError, of } from 'rxjs';
 import { User } from '../../models/user';
 import { Palette } from '../../models/palette';
+import { ColorInPalette } from '../../models/colorInPalette';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,11 @@ export class HttpService {
 
   getAvailablePalettes() {
     return this.http.get<Palette[]>(this.baseURL + "/palette/available_palettes",
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  generate(colorInPalettes: ColorInPalette[], scheme: string) {
+    return this.http.post<ColorInPalette[]>(this.baseURL + "/color_in_palette/generate/" + scheme, colorInPalettes,
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   }
 }

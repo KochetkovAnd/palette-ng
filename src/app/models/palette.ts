@@ -3,11 +3,11 @@ import { Tag } from "./tag";
 import { User } from "./user";
 
 export interface Palette {
-    id: number,
+    id?: number,
     name: string,
-    isPrivate: boolean,
+    private: boolean,
     modelType: string,
-    creator: User,
+    creator?: User,
     tags: Tag[],
     colorInPalettes: ColorInPalette[]
 }

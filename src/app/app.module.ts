@@ -10,6 +10,8 @@ import { LoginBlockComponent } from './components/login-block/login-block.compon
 import { PalettePageComponent } from './pages/palette-page/palette-page.component';
 import { NavbarUserComponent } from './components/navbar-user/navbar-user.component';
 import { PaletteItemComponent } from './components/palette-item/palette-item.component';
+import { GeneratePalettePageComponent } from './pages/generate-palette-page/generate-palette-page.component';
+import { GenerateBlockComponent } from './components/generate-block/generate-block.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { PaletteItemComponent } from './components/palette-item/palette-item.com
     LoginBlockComponent,
     PalettePageComponent,
     NavbarUserComponent,
-    PaletteItemComponent
+    PaletteItemComponent,
+    GeneratePalettePageComponent,
+    GenerateBlockComponent
   ],
   imports: [
     BrowserModule,
