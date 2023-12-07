@@ -32,21 +32,23 @@ $default_transition: 0.3s ease-in-out;
 .color {
     width: 100%;
     height: 300px;
+    position: relative;
 }
 
 .color a {
-    padding-top: 50px ;
     display: block;
     text-align: center;
-    line-height: 200px;
+    line-height: 300px;
     font-size: 15px;
     cursor: default;
     font-weight: bold;
 }
 
-.color img {    
+.color img {  
+    position: absolute;  
     padding: 5px;
-    margin: 10px;
+    left: 10px;
+    bottom: 10px;
     width: 20px;
     height: 20px;
     border-radius: $border_radius;

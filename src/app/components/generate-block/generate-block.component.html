@@ -10,17 +10,16 @@
         <div class="color-block" *ngFor="let colorInPalette of colorsInPalette; let i = index" [ngStyle]="getWidth()">
             <div class="color" [ngStyle]="{'background-color': '#' + colorInPalette.hex}">
                 
-                <a [ngStyle]="getTextColor(colorInPalette.hex)">{{colorInPalette.hex}}</a>
-                
+                <a [ngStyle]="getTextColor(colorInPalette.hex)">{{colorInPalette.hex}}</a>                
                 <img class="closed" src="assets/close-lock.png" *ngIf="closed[i]" (click)="change(i)"> 
-                <img src="assets/open-lock.png"*ngIf="!closed[i]" (click)="change(i)">
+                <img src="assets/open-lock.png"*ngIf="!closed[i]" (click)="change(i)">    
                 
                 
             </div>
         </div>
     </div>
     <div class="buttons">
-        <button (click)="regenerate">Генерировать</button>
+        <button (click)="regenerate()">Генерировать</button>
     </div>
     
 </div>

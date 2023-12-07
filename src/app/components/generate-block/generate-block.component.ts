@@ -58,6 +58,7 @@ export class GenerateBlockComponent {
   }
 
   async regenerate(){
+    console.log("dsfs")
     for (let i = 0; i < this.closed.length; i++) {
       if (!this.closed[i]) {
         this.colorsInPalette[i].hex = ""
