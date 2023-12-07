@@ -31,9 +31,10 @@ export class GenerateBlockComponent {
     private httpService: HttpService
   ) {}
 
-  @Input() modelType: string = "mono"
+  @Input() modelType: string = "monochrome"
   @Input() colorsInPalette: ColorInPalette[]  = []
   closed: boolean[] = []
+  colorSchemes: string[] = ['monochrome', 'sequential', 'complementary', 'split-complementary', 'triangular']
 
   async ngOnInit() {     
     this.colorsInPalette = await lastValueFrom(this.httpService.generate(this.colorsInPalette, this.modelType))          
@@ -65,5 +66,16 @@ export class GenerateBlockComponent {
     this.colorsInPalette = await lastValueFrom(this.httpService.generate(this.colorsInPalette, this.modelType))  
   }
 
+  plus () {
+    this.closed.push(false)
+    this.colorsInPalette.push({
+      hex: "FFFFFF",
+      colorRole: ""
+    })
+  }
 
+  minus () {
+    this.closed.pop()
+    this.colorsInPalette.pop()
+  }
 }

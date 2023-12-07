@@ -11,7 +11,7 @@ export class GeneratePalettePageComponent {
     id: undefined,
     name: "",
     private: true,
-    modelType: "mono",
+    modelType: "monochrome",
     creator: undefined,
     tags: [],
     colorInPalettes: []

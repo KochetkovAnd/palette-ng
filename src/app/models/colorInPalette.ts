@@ -1,6 +1,6 @@
 
 export interface ColorInPalette {
-    id: number,
+    id?: number,
     hex: string,
     colorRole: string
 }
