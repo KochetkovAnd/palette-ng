@@ -58,7 +58,6 @@ export class GenerateBlockComponent {
   }
 
   async regenerate(){
-    console.log("dsfs")
     for (let i = 0; i < this.closed.length; i++) {
       if (!this.closed[i]) {
         this.colorsInPalette[i].hex = ""
@@ -78,5 +77,14 @@ export class GenerateBlockComponent {
   minus () {
     this.closed.pop()
     this.colorsInPalette.pop()
+  }
+
+  onModelChange() {
+    this.colorsInPalette = []
+    this.ngOnInit()
+  }
+
+  buttonVisible() {
+    return this.modelType == "monochrome"
   }
 }
