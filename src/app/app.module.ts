@@ -12,6 +12,7 @@ import { NavbarUserComponent } from './components/navbar-user/navbar-user.compon
 import { PaletteItemComponent } from './components/palette-item/palette-item.component';
 import { GeneratePalettePageComponent } from './pages/generate-palette-page/generate-palette-page.component';
 import { GenerateBlockComponent } from './components/generate-block/generate-block.component';
+import { StyleChangerService } from './services/style-service/style-changer.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { GenerateBlockComponent } from './components/generate-block/generate-blo
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [StyleChangerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

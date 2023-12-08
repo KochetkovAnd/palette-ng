@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ColorInPalette } from '../../models/colorInPalette';
 import { HttpService } from '../../services/http-service/http.service';
 import { lastValueFrom } from 'rxjs';
+import { StyleChangerService } from '../../services/style-service/style-changer.service';
 
 
 function isColorDark(color:string): boolean {
@@ -28,7 +29,8 @@ function HEXtoRGB(hex:string): {r: number, g: number, b: number} {
 export class GenerateBlockComponent {
 
   constructor(
-    private httpService: HttpService
+    private httpService: HttpService,
+    private styleService: StyleChangerService
   ) {}
 
   @Input() modelType: string = "monochrome"
@@ -36,8 +38,10 @@ export class GenerateBlockComponent {
   closed: boolean[] = []
   colorSchemes: string[] = ['monochrome', 'sequential', 'complementary', 'split-complementary', 'triangular']
 
-  async ngOnInit() {     
-    this.colorsInPalette = await lastValueFrom(this.httpService.generate(this.colorsInPalette, this.modelType))          
+  async ngOnInit() {  
+    this.styleService.reset()   
+    this.colorsInPalette = await lastValueFrom(this.httpService.generate(this.colorsInPalette, this.modelType))       
+    this.styleService.setColors(this.colorsInPalette)   
     this.closed = []
     for (let i = 0; i < this.colorsInPalette.length; i++ ) {this.closed.push(false)}
   }
@@ -58,12 +62,14 @@ export class GenerateBlockComponent {
   }
 
   async regenerate(){
+    this.styleService.reset()
     for (let i = 0; i < this.closed.length; i++) {
       if (!this.closed[i]) {
         this.colorsInPalette[i].hex = ""
       }
     }
     this.colorsInPalette = await lastValueFrom(this.httpService.generate(this.colorsInPalette, this.modelType))  
+    this.styleService.setColors(this.colorsInPalette) 
   }
 
   plus () {

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2, RendererFactory2 } from '@angular/core';
 import { Palette } from '../../models/palette';
+import { StyleChangerService } from '../../services/style-service/style-changer.service';
 
 @Component({
   selector: 'app-generate-palette-page',
@@ -7,6 +8,14 @@ import { Palette } from '../../models/palette';
   styleUrl: './generate-palette-page.component.scss'
 })
 export class GeneratePalettePageComponent {
+
+
+  
+  
+  constructor(
+    private styleService: StyleChangerService
+  ) { }
+
   palette: Palette = {
     id: undefined,
     name: "",
@@ -16,4 +25,8 @@ export class GeneratePalettePageComponent {
     tags: [],
     colorInPalettes: []
   }
+
+  test() {   
+    this.styleService.recolor() 
+  }  
 }
