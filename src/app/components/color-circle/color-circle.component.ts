@@ -1,5 +1,5 @@
-import { CdkDragMove, CdkDragStart } from '@angular/cdk/drag-drop';
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { CdkDragEnd, CdkDragMove, CdkDragStart } from '@angular/cdk/drag-drop';
+import { Component, Input, DoCheck } from '@angular/core';
 import { HSBColor } from '../../models/colors/hsbColor';
 import { RGBColor } from '../../models/colors/rgbColor';
 import { WheelColorsService } from '../../services/wheel-colors-service/wheel-colors.service';
@@ -90,17 +90,16 @@ function RGBtoHEX(rgbColor: RGBColor): string {
   templateUrl: './color-circle.component.html',
   styleUrl: './color-circle.component.scss'
 })
-export class ColorCircleComponent {
+export class ColorCircleComponent implements DoCheck {
   width = 500
   height = 500
 
-  @Input() colorInPalette: ColorInPalette = {
-    hex: "000000",
-    colorRole: ""
-  }
-  @Input() i: number = 0
+  @Input() rgbColor: RGBColor = {
+    red: 0, green:0, blue:0
+  }  
 
   backColor!: HSBColor;
+  isDragging = false
 
   centerX = this.width / 2
   centerY = this.width / 2
@@ -109,17 +108,23 @@ export class ColorCircleComponent {
   startX = this.centerX
   startY = this.centerY
   blockPosition = { x: this.centerX, y: this.centerY };
+  blockColor = `rgb(${this.rgbColor.red}, ${this.rgbColor.green}, ${this.rgbColor.blue})`
+  
 
-  constructor (
-    private wheelColorService: WheelColorsService
-  ) { }
+  ngDoCheck() {
+    if (!this.isDragging) {
+      this.backColor = RGBToHSB(this.rgbColor)
+      this.setBlockPositionFromHSL(this.backColor.hue, this.backColor.saturation, this.backColor.brightness)  
+      this.setHSLColor()
+    }    
+  }
 
   ngOnInit() {
-    this.backColor = RGBToHSB(HEXtoRGB(this.colorInPalette.hex))
-    this.setBlockPositionFromHSL(this.backColor.hue, this.backColor.saturation, this.backColor.brightness)  
+    this.blockColor = `rgb(${this.rgbColor.red}, ${this.rgbColor.green}, ${this.rgbColor.blue})`
   }
 
   onDragStarted(event: CdkDragStart) {
+    this.isDragging = true
     this.startX = this.blockPosition.x
     this.startY = this.blockPosition.y
   }
@@ -136,22 +141,31 @@ export class ColorCircleComponent {
       this.blockPosition.x = this.startX + event.distance.x
       this.blockPosition.y = this.startY + event.distance.y      
     }
+
+    this.setHSLColor()
+    
+  }
+
+  onDragEnded(event: CdkDragEnd) {
+    this.isDragging = false
   }
 
   
 
-  getHSLColor(): string {
+  setHSLColor() {
     const angle = Math.atan2(this.blockPosition.y - this.centerY, this.blockPosition.x - this.centerX);
     const distance = Math.sqrt((this.blockPosition.x - this.centerX) ** 2 + (this.blockPosition.y - this.centerY) ** 2);    
     const normalizedAngle = angle < 0 ? angle + 2 * Math.PI : angle;
     const hue = (normalizedAngle * 180) / Math.PI;
     const saturation = (distance / this.r) * 100;
     const brightness= this.backColor.brightness;
-    let rgbColor = HSBtoRGB({
+    let color = HSBtoRGB({
       hue,saturation,brightness
     })
-    this.colorInPalette.hex = RGBtoHEX(rgbColor)
-    return `rgb(${rgbColor.red}, ${rgbColor.green}, ${rgbColor.blue})`;
+    this.rgbColor.red = color.red
+    this.rgbColor.blue = color.blue
+    this.rgbColor.green = color.green
+    this.blockColor =  `rgb(${color.red}, ${color.green}, ${color.blue})`;
   }
 
   setBlockPositionFromHSL(hue: number, saturation: number, brightness: number) {

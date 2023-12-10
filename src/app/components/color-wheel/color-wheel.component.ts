@@ -4,13 +4,12 @@ import { ColorInPalette } from '../../models/colorInPalette';
 import { WheelColorsService } from '../../services/wheel-colors-service/wheel-colors.service';
 import { RGBColor } from '../../models/colors/rgbColor';
 
-function isColorDark(color: string): boolean {
-  const brightness = calculateBrightness(color);
+function isColorDark(rgbcolor: RGBColor): boolean {
+  const brightness = calculateBrightness(rgbcolor);
   return brightness < 100;
 }
-function calculateBrightness(color: string): number {
-  const rgb = HEXtoRGB(color);
-  return (rgb.red * 299 + rgb.green * 587 + rgb.blue * 114) / 1000;
+function calculateBrightness(rgbcolor: RGBColor): number {  
+  return (rgbcolor.red * 299 + rgbcolor.green * 587 + rgbcolor.blue * 114) / 1000;
 }
 
 function HEXtoRGB(hex: string): RGBColor {
@@ -41,73 +40,37 @@ export class ColorWheelComponent  {
 
   private ctx: CanvasRenderingContext2D | null = null
 
-  colorsInPalette: ColorInPalette[] = []  
-  isActive = true
+  
+  rgbColors: RGBColor[] = [
+    {red: 204, green: 41, blue:204},
+    {red: 153, green: 61, blue:153},
+    {red: 255, green: 0, blue:255},
+    {red: 102, green: 61, blue:102},
+    {red: 51, green: 41, blue:51}
+    
+  ]
 
-  getRed(i: number ) {
-    return parseInt(this.colorsInPalette[i].hex.substring(0,2), 16)
-  }
-
-  getGreen(i: number ) {
-    return parseInt(this.colorsInPalette[i].hex.substring(2,4), 16)
-  }
-
-  getBlue(i: number ) {
-    return parseInt(this.colorsInPalette[i].hex.substring(4,6), 16)
-  }
-
-  constructor(
-    private wheelColorsService: WheelColorsService
-  ) { }
-
-  getCardStyle(colorInPalette: ColorInPalette) {
+  getCardStyle(color: RGBColor) {
     return {
-      'background-color': '#' + colorInPalette.hex
+      'background-color': `rgb(${color.red},${color.green},${color.blue})`
     }
   }
 
-  getTextColor(hex: string) {
-    let color = isColorDark(hex) ? 'var(--light_text)' : 'var(--dark_text)'
+  getTextColor(rgbcolor: RGBColor) {
+    let color = isColorDark(rgbcolor) ? 'var(--light_text)' : 'var(--dark_text)'
     return { 'color': color }
   }
 
-  ngOnInit() {   
-    
-    this.colorsInPalette = [
-      { hex: "CC29CC", colorRole: "" },
-      { hex: "993D99", colorRole: "" },
-      { hex: "FF00FF", colorRole: "" },
-      { hex: "663D66", colorRole: "" },
-      { hex: "332933", colorRole: "" },
-    ]
-    
+  getHEX(rgbColor : RGBColor) {
+    return RGBtoHEX(rgbColor)
+  }
+
+  ngOnInit() {  
     this.ctx = this.canvas.nativeElement.getContext('2d');
     if (this.ctx) {
       this.drawColorWheel()
     }
-  }
-
-  onSliderChange(event: Event, color: string, i: number) {
-    let elem = event.target as HTMLInputElement
-    let value = parseInt(elem.value)
-    if (color == "red") {
-      this.colorsInPalette[i] = {
-        hex: value.toString(16) + this.colorsInPalette[i].hex.substring(2,6),
-        colorRole: ""
-      }
-    } else if (color == "green") {
-      this.colorsInPalette[i] = {
-        hex: this.colorsInPalette[i].hex.substring(0,2) + value.toString(16) + this.colorsInPalette[i].hex.substring(4,6),
-        colorRole: ""
-      }
-    } else {
-      this.colorsInPalette[i] = {
-        hex: this.colorsInPalette[i].hex.substring(0,4) +value.toString(16),
-        colorRole: ""
-      }
-    }
-  }
-  
+  }  
 
   drawColorWheel() {
     if (this.ctx) {

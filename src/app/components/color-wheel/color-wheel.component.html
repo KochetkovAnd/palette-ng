@@ -1,23 +1,23 @@
 <div class="container">
     <div class="color-whell-block">
         <canvas #canvas width="500" height="500"></canvas>
-        <color-circle  *ngFor="let colorInPalette of colorsInPalette; let i = index" [colorInPalette]="colorInPalette" [i] = i></color-circle>        
+        <color-circle  *ngFor="let rgbColor of rgbColors; let i = index" [rgbColor]="rgbColor"></color-circle>        
     </div>
     <div class="color-line">
-        <div class="card" *ngFor="let colorInPalette of colorsInPalette; let i = index">
-            <div class="color" [ngStyle]="getCardStyle(colorInPalette)">
-                <a [ngStyle]="getTextColor(colorInPalette.hex)"> #{{colorInPalette.hex}}</a>
+        <div class="card" *ngFor="let rgbColor of rgbColors; let i = index">
+            <div class="color" [ngStyle]="getCardStyle(rgbColor)">
+                <a [ngStyle]="getTextColor(rgbColor)"> #{{getHEX(rgbColor)}}</a>
             </div>            
 
             <div class="sliders">
                 <div class="slider-block">
-                    <a>R</a><input type="range" min="0" max="255" class="slider" [value]="getRed(i)" (change)="onSliderChange($event, 'red', i)">
+                    <a>R</a><input type="range" min="0" max="255" class="slider" [(ngModel)] = "rgbColors[i].red">
                 </div>
                 <div class="slider-block">
-                    <a>G</a><input type="range" min="0" max="255" class="slider" [value]="getGreen(i)" (change)="onSliderChange($event, 'green', i)">
+                    <a>G</a><input type="range" min="0" max="255" class="slider" [(ngModel)] = "rgbColors[i].green">
                 </div>
                 <div class="slider-block">
-                    <a>B</a><input type="range" min="0" max="255" class="slider" [value]="getBlue(i)" (change)="onSliderChange($event, 'blue', i)">
+                    <a>B</a><input type="range" min="0" max="255" class="slider" [(ngModel)] = "rgbColors[i].blue">
                 </div>
             </div>
             
