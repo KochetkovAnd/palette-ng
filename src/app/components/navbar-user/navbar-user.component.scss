@@ -1,5 +1,4 @@
 $border_radius: 10px;
-
 $default_transition: 0.3s ease-in-out;
 
 nav {
@@ -8,7 +7,7 @@ nav {
     height: 70px;
     left: 0%;
     top: 0%;
-    background-color: var(--main_brand_color);
+    background-color: var(--dark_shades);
 }
 
 nav ul {
@@ -23,7 +22,7 @@ nav ul li {
 
 .default_text {
     display: block;
-    color: var(--light_shades);
+    color: var(--light_text);
     line-height: 50px;
     margin: 10px;
     text-align: center;
@@ -37,7 +36,7 @@ nav ul li {
 }
 
 .default_text:hover {
-    background-color: var(--light_accent);
+    background-color: var(--dark_shades_hover);
     transition: $default_transition;
     cursor: default;
 }
@@ -46,18 +45,18 @@ nav ul li {
     margin: 10px;
     display: flex;
     justify-content: center;
-    background-color: var(--main_brand_color);
+    background-color: var(--dark_shades);
     border-radius: $border_radius;
 }
 
 .img-box:hover {
-    background-color: var(--light_accent);
+    background-color: var(--dark_shades_hover);
     transition: $default_transition;
 }
 
 .img-box a {
     display: block;
-    color: var(--light_shades);
+    color: var(--light_text);
     line-height: 50px;
     margin-left: 10px;
     font-size: 18px;

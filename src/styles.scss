@@ -12,8 +12,23 @@
 
 :root {
     --light_shades: #FAFBF8;
+
     --light_accent: #B5BCC2;
-    --main_brand_color:#9DA7B3;
-    --dark_accent: #6AB3EF;
-    --dark_shades: #386FD2;
+
+    --main_brand_color:#7777FC;
+    --main_brand_color_hover:#6F6FED;
+
+
+    --dark_accent: #191D21;
+
+
+    --dark_shades: #0C0C28;
+    --dark_shades_hover:#0F0F33;
+
+    --dark_text: #0C0C28;
+    --light_text: #FAFBF8;
+}
+
+body {
+    background-color: var(--light_shades);
 }

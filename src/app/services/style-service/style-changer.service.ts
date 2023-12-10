@@ -9,9 +9,9 @@ export class StyleChangerService {
 
   default_light_shades = "FAFBF8"
   default_light_accent = "B5BCC2"
-  default_main_brand_color = "9DA7B3"
-  default_dark_accent = "6AB3EF"
-  default_dark_shades = "386FD2"
+  default_main_brand_color = "7777FC"
+  default_dark_accent = "191D21"
+  default_dark_shades = "0C0C28"
 
 
 

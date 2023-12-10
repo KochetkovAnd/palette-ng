@@ -1,12 +1,11 @@
 $border_radius: 10px;
-
 $default_transition: 0.3s ease-in-out;
 
 .container {
     padding: 20px;
     width: calc(100% - 40px);
     height: 520px;
-    background-color: var(--dark_shades);
+    background-color: var(--dark_shades_hover);
 }
 
 .color-line {

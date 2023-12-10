@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppComponent } from './app.component';
 import { LoginBlockComponent } from './components/login-block/login-block.component';
@@ -13,6 +14,9 @@ import { PaletteItemComponent } from './components/palette-item/palette-item.com
 import { GeneratePalettePageComponent } from './pages/generate-palette-page/generate-palette-page.component';
 import { GenerateBlockComponent } from './components/generate-block/generate-block.component';
 import { StyleChangerService } from './services/style-service/style-changer.service';
+import { GenerateBlockSimpleComponent } from './components/generate-block-simple/generate-block-simple.component';
+import { ColorWheelComponent } from './components/color-wheel/color-wheel.component';
+import { TestComponent } from './components/test/test.component';
 
 @NgModule({
   declarations: [
@@ -22,14 +26,18 @@ import { StyleChangerService } from './services/style-service/style-changer.serv
     NavbarUserComponent,
     PaletteItemComponent,
     GeneratePalettePageComponent,
-    GenerateBlockComponent
+    GenerateBlockComponent,
+    GenerateBlockSimpleComponent,
+    ColorWheelComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DragDropModule
   ],
   providers: [StyleChangerService],
   bootstrap: [AppComponent]
