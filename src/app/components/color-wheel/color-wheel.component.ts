@@ -87,8 +87,25 @@ export class ColorWheelComponent  {
     }
   }
 
-  test() {
-    console.log(this.colorsInPalette[0].hex)
+  onSliderChange(event: Event, color: string, i: number) {
+    let elem = event.target as HTMLInputElement
+    let value = parseInt(elem.value)
+    if (color == "red") {
+      this.colorsInPalette[i] = {
+        hex: value.toString(16) + this.colorsInPalette[i].hex.substring(2,6),
+        colorRole: ""
+      }
+    } else if (color == "green") {
+      this.colorsInPalette[i] = {
+        hex: this.colorsInPalette[i].hex.substring(0,2) + value.toString(16) + this.colorsInPalette[i].hex.substring(4,6),
+        colorRole: ""
+      }
+    } else {
+      this.colorsInPalette[i] = {
+        hex: this.colorsInPalette[i].hex.substring(0,4) +value.toString(16),
+        colorRole: ""
+      }
+    }
   }
   
 
