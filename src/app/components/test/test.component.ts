@@ -15,25 +15,15 @@ export class TestComponent {
   r = 250
   startX = this.centerX
   startY = this.centerY
-
-  getXPart(x: number) {
-    let xPart = this.startX + x - this.centerX
-    return xPart
-  }
-
-  getYPart(y: number) {
-    let yPart = this.startY + y - this.centerY
-    return yPart
-  }
-
+  
   onDragStarted(event: CdkDragStart) {
     this.startX = this.blockPosition.x
     this.startY = this.blockPosition.y
   }
 
   onDragMoved(event: CdkDragMove) {
-    let xPart = this.getXPart(event.distance.x)
-    let yPart = this.getYPart(event.distance.y)
+    let xPart = this.startX + event.distance.x - this.centerX
+    let yPart = this.startY + event.distance.y - this.centerY
     let s = Math.sqrt(xPart * xPart + yPart * yPart)
     if (s > this.r) {
       this.blockPosition.x = xPart * this.r / s + this.centerX

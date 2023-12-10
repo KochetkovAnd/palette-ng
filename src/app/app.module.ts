@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+
 import { AppComponent } from './app.component';
 import { LoginBlockComponent } from './components/login-block/login-block.component';
 import { PalettePageComponent } from './pages/palette-page/palette-page.component';
@@ -17,6 +18,7 @@ import { StyleChangerService } from './services/style-service/style-changer.serv
 import { GenerateBlockSimpleComponent } from './components/generate-block-simple/generate-block-simple.component';
 import { ColorWheelComponent } from './components/color-wheel/color-wheel.component';
 import { TestComponent } from './components/test/test.component';
+import { ColorCircleComponent } from './components/color-circle/color-circle.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { TestComponent } from './components/test/test.component';
     GenerateBlockComponent,
     GenerateBlockSimpleComponent,
     ColorWheelComponent,
-    TestComponent
+    TestComponent,
+    ColorCircleComponent
   ],
   imports: [
     BrowserModule,

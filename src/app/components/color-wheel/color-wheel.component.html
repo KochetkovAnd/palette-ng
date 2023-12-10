@@ -1,7 +1,28 @@
 <div class="container">
-    <canvas #canvas width="300" height="300">
-        <div class="color">
-            fgdf
+    <div class="color-whell-block">
+        <canvas #canvas width="500" height="500"></canvas>
+        <color-circle  *ngFor="let colorInPalette of colorsInPalette; let i = index" [colorInPalette]="colorInPalette" [i] = i></color-circle>        
+    </div>
+    <div class="color-line">
+        <div class="card" *ngFor="let colorInPalette of colorsInPalette; let i = index">
+            <div class="color" [ngStyle]="getCardStyle(colorInPalette)">
+                <a [ngStyle]="getTextColor(colorInPalette.hex)"> #{{colorInPalette.hex}}</a>
+            </div>            
+
+            <div class="sliders">
+                <div class="slider-block">
+                    <a>R</a><input type="range" min="0" max="255" class="slider" [value]="getRed(i)">
+                </div>
+                <div class="slider-block">
+                    <a>G</a><input type="range" min="0" max="255" class="slider" [value]="getGreen(i)">
+                </div>
+                <div class="slider-block">
+                    <a>B</a><input type="range" min="0" max="255" class="slider" [value]="getBlue(i)">
+                </div>
+            </div>
+            
         </div>
-    </canvas>
+    </div>   
+    
 </div>
+<button (click)="test()">test</button>
