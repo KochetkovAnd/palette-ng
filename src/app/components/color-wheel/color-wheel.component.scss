@@ -11,7 +11,7 @@ $border_radius: 10px;
 .color-whell-block {
     width: 500px;
     height: 500px;
-    margin: 25px calc(25% - 250px);
+    margin: 25px calc(25% - 250px) 25px calc(25% - 450px);
 }
 
 .container canvas {
@@ -76,4 +76,23 @@ $border_radius: 10px;
     font-size: 15px;
     cursor: default;
     font-weight: bold;
+}
+
+
+select {
+    margin: 10px;
+    width: 180px;
+    height: 40px;
+    padding: 5px;
+    font-size: 15px;
+    color: var(--light_shades);
+    box-shadow: 3px 3px 2px 2px rgba(0,0,0,0.25);
+    background-color: var(--light_accent);
+    border: none;
+    outline: none;
+    border-radius: $border_radius;
+}
+
+select option:checked  {
+    background-color: var(--main_brand_color);
 }

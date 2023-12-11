@@ -1,7 +1,12 @@
 <div class="container">
+
+    <select [(ngModel)] ="modelType">
+        <option *ngFor="let schema of colorSchemes" [value]="schema">{{schema}}</option>
+    </select>
+
     <div class="color-whell-block">
         <canvas #canvas width="500" height="500"></canvas>
-        <color-circle  *ngFor="let rgbColor of rgbColors; let i = index" [rgbColor]="rgbColor"></color-circle>        
+        <color-circle  *ngFor="let rgbColor of rgbColors; let i = index" [rgbColors]="rgbColors" [i] = "i" [colorSchema] = "modelType"></color-circle>        
     </div>
     <div class="color-line">
         <div class="card" *ngFor="let rgbColor of rgbColors; let i = index">

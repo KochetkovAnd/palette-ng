@@ -84,6 +84,26 @@ function RGBtoHEX(rgbColor: RGBColor): string {
   return `${hexR}${hexG}${hexB}`;
 }
 
+function clip(x:number) {
+  if (x > 100) {
+    return 100
+  } else if (x < 0) {
+    return 0
+  } else {
+    return x
+  }
+}
+
+function clipHue(x:number) {
+  if (x > 360) {
+    return x - 360
+  } else if (x < 0) {
+    return x + 360
+  } else {
+    return x
+  }
+}
+
 
 @Component({
   selector: 'color-circle',
@@ -94,9 +114,9 @@ export class ColorCircleComponent implements DoCheck {
   width = 500
   height = 500
 
-  @Input() rgbColor: RGBColor = {
-    red: 0, green:0, blue:0
-  }  
+  @Input() rgbColors: RGBColor[] = []
+  @Input() i: number = 0
+  @Input() colorSchema: string = "монохроматическая"
 
   backColor!: HSBColor;
   isDragging = false
@@ -108,19 +128,26 @@ export class ColorCircleComponent implements DoCheck {
   startX = this.centerX
   startY = this.centerY
   blockPosition = { x: this.centerX, y: this.centerY };
-  blockColor = `rgb(${this.rgbColor.red}, ${this.rgbColor.green}, ${this.rgbColor.blue})`
+  blockColor: RGBColor = {
+    red: 0, green: 0, blue: 0
+  }
+
+  getColor() {
+    return `rgb(${this.blockColor.red}, ${this.blockColor.green}, ${this.blockColor.blue})`
+  }
   
 
   ngDoCheck() {
     if (!this.isDragging) {
-      this.backColor = RGBToHSB(this.rgbColor)
+      this.backColor = RGBToHSB(this.rgbColors[this.i])
       this.setBlockPositionFromHSL(this.backColor.hue, this.backColor.saturation, this.backColor.brightness)  
-      this.setHSLColor()
+      let hsbColor = this.getHSBcolorByPosition(this.blockPosition.x, this.blockPosition.y)    
+      this.setHSLColor(hsbColor)
     }    
   }
 
   ngOnInit() {
-    this.blockColor = `rgb(${this.rgbColor.red}, ${this.rgbColor.green}, ${this.rgbColor.blue})`
+    this.blockColor = this.rgbColors[this.i]
   }
 
   onDragStarted(event: CdkDragStart) {
@@ -142,7 +169,10 @@ export class ColorCircleComponent implements DoCheck {
       this.blockPosition.y = this.startY + event.distance.y      
     }
 
-    this.setHSLColor()
+    let hsbColor = this.getHSBcolorByPosition(this.blockPosition.x, this.blockPosition.y)    
+    this.setHSLColor(hsbColor)
+    this.updateColors(this.backColor, hsbColor)
+    this.backColor = hsbColor
     
   }
 
@@ -152,20 +182,55 @@ export class ColorCircleComponent implements DoCheck {
 
   
 
-  setHSLColor() {
-    const angle = Math.atan2(this.blockPosition.y - this.centerY, this.blockPosition.x - this.centerX);
-    const distance = Math.sqrt((this.blockPosition.x - this.centerX) ** 2 + (this.blockPosition.y - this.centerY) ** 2);    
+  setHSLColor(hsbColor: HSBColor) {
+    let color = HSBtoRGB(hsbColor)
+    this.rgbColors[this.i].red = color.red
+    this.rgbColors[this.i].blue = color.blue
+    this.rgbColors[this.i].green = color.green 
+  }
+
+  getHSBcolorByPosition(x: number, y: number): HSBColor{
+    const angle = Math.atan2(y - this.centerY, x - this.centerX);
+    const distance = Math.sqrt((x - this.centerX) ** 2 + (y - this.centerY) ** 2);    
     const normalizedAngle = angle < 0 ? angle + 2 * Math.PI : angle;
     const hue = (normalizedAngle * 180) / Math.PI;
     const saturation = (distance / this.r) * 100;
     const brightness= this.backColor.brightness;
-    let color = HSBtoRGB({
-      hue,saturation,brightness
+    return {hue, saturation, brightness}
+  }
+
+  updateColors(oldHsb: HSBColor, newHsb: HSBColor) {    
+
+    let dif_hue = newHsb.hue - oldHsb.hue
+    let dif_satuturation = newHsb.saturation / oldHsb.saturation
+
+    
+    let colors: RGBColor[] = []
+    this.rgbColors.forEach(color => {
+      colors.push({red: color.red, green: color.green, blue: color.blue})
     })
-    this.rgbColor.red = color.red
-    this.rgbColor.blue = color.blue
-    this.rgbColor.green = color.green
-    this.blockColor =  `rgb(${color.red}, ${color.green}, ${color.blue})`;
+    
+    if (this.colorSchema == "монохроматическая") {
+      for (let j = 0; j < 5; j++) {
+        if (j!= this.i) {
+          let color = RGBToHSB(colors[j])
+          color.hue = newHsb.hue          
+          // color.saturation = this.i == 2 ? clip(color.saturation * dif_satuturation) : color.saturation
+          let rgbColor = HSBtoRGB(color)  
+          colors[j].red = rgbColor.red
+          colors[j].green = rgbColor.green
+          colors[j].blue = rgbColor.blue        
+        }
+      }
+    }
+    
+
+    for (let j = 0; j < 5; j++) {
+      if (j!= this.i) {
+        this.rgbColors[j] = colors[j]
+      }
+    }
+    
   }
 
   setBlockPositionFromHSL(hue: number, saturation: number, brightness: number) {

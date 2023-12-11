@@ -1,4 +1,4 @@
 <div class = "block" cdkDrag (cdkDragStarted)="onDragStarted($event)" (cdkDragMoved)="onDragMoved($event)" (cdkDragEnded)="onDragEnded($event)"
     [style.transform]="'translate(' + (blockPosition.x - 15) + 'px, ' + (blockPosition.y - 15) + 'px)'"
-    [style.background-color]="blockColor"
+    [style.background-color]='getColor()'
 ></div>

@@ -40,13 +40,16 @@ export class ColorWheelComponent  {
 
   private ctx: CanvasRenderingContext2D | null = null
 
+  modelType: string = "монохроматическая"
+  closed: boolean[] = []
+  colorSchemes: string[] = ['монохроматическая', 'последовательная', 'комплиментарная']
   
   rgbColors: RGBColor[] = [
-    {red: 204, green: 41, blue:204},
-    {red: 153, green: 61, blue:153},
-    {red: 255, green: 0, blue:255},
-    {red: 102, green: 61, blue:102},
-    {red: 51, green: 41, blue:51}
+    {red: 255, green: 0, blue:0},
+    {red: 255, green: 51, blue:51},
+    {red: 204, green: 82, blue:82},
+    {red: 204, green: 102, blue:102},
+    {red: 51, green: 31, blue:31}
     
   ]
 
