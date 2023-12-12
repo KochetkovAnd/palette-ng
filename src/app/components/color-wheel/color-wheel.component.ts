@@ -42,7 +42,7 @@ export class ColorWheelComponent  {
 
   modelType: string = "монохроматическая"
   closed: boolean[] = []
-  colorSchemes: string[] = ['монохроматическая', 'последовательная', 'комплиментарная']
+  colorSchemes: string[] = ['монохроматическая', 'последовательная', 'комплиментарная', 'сплит-комплиментарная']
   
   rgbColors: RGBColor[] = []
 
@@ -60,6 +60,20 @@ export class ColorWheelComponent  {
       { red: 46, green: 230, blue: 214 },
       { red: 46, green: 168, blue: 230 },
       { red: 46, green: 92, blue: 230 }
+    ],
+    'комплиментарная' : [
+      { red: 0, green: 250, blue: 250 },
+      { red: 55, green: 166, blue: 166 },
+      { red: 250, green: 0, blue: 0 },
+      { red: 186, green: 47, blue: 47 },
+      { red: 122, green: 61, blue: 61 }
+    ],
+    'сплит-комплиментарная': [
+      { red: 0, green: 250, blue: 125 },
+      { red: 0, green: 125, blue: 250 },
+      { red: 61, green: 92, blue: 122 },
+      { red: 250, green: 0, blue: 0 },
+      { red: 122, green: 61, blue: 61 }
     ]
   }
 

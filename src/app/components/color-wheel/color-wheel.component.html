@@ -1,32 +1,32 @@
-<div class="container">
-
+<div class="main">
+    <div class="container">
+        <div class="color-whell-block">
+            <canvas #canvas width="500" height="500"></canvas>
+            <color-circle  *ngFor="let rgbColor of rgbColors; let i = index" [rgbColors]="rgbColors" [i] = "i" [colorSchema] = "modelType"></color-circle>        
+        </div>
+        <div class="color-line">
+            <div class="card" *ngFor="let rgbColor of rgbColors; let i = index">
+                <div class="color" [ngStyle]="getCardStyle(rgbColor)">
+                    <a [ngStyle]="getTextColor(rgbColor)"> #{{getHEX(rgbColor)}}</a>
+                </div>            
+    
+                <div class="sliders">
+                    <div class="slider-block">
+                        <a>R</a><input type="range" min="0" max="255" class="slider" [(ngModel)] = "rgbColors[i].red">
+                    </div>
+                    <div class="slider-block">
+                        <a>G</a><input type="range" min="0" max="255" class="slider" [(ngModel)] = "rgbColors[i].green">
+                    </div>
+                    <div class="slider-block">
+                        <a>B</a><input type="range" min="0" max="255" class="slider" [(ngModel)] = "rgbColors[i].blue">
+                    </div>
+                </div>                
+            </div>
+        </div>       
+    </div>
+    
     <select [(ngModel)] ="modelType" (change)="onModelChange()">
         <option *ngFor="let schema of colorSchemes" [value]="schema">{{schema}} </option>
     </select>
-
-    <div class="color-whell-block">
-        <canvas #canvas width="500" height="500"></canvas>
-        <color-circle  *ngFor="let rgbColor of rgbColors; let i = index" [rgbColors]="rgbColors" [i] = "i" [colorSchema] = "modelType"></color-circle>        
-    </div>
-    <div class="color-line">
-        <div class="card" *ngFor="let rgbColor of rgbColors; let i = index">
-            <div class="color" [ngStyle]="getCardStyle(rgbColor)">
-                <a [ngStyle]="getTextColor(rgbColor)"> #{{getHEX(rgbColor)}}</a>
-            </div>            
-
-            <div class="sliders">
-                <div class="slider-block">
-                    <a>R</a><input type="range" min="0" max="255" class="slider" [(ngModel)] = "rgbColors[i].red">
-                </div>
-                <div class="slider-block">
-                    <a>G</a><input type="range" min="0" max="255" class="slider" [(ngModel)] = "rgbColors[i].green">
-                </div>
-                <div class="slider-block">
-                    <a>B</a><input type="range" min="0" max="255" class="slider" [(ngModel)] = "rgbColors[i].blue">
-                </div>
-            </div>
-            
-        </div>
-    </div>       
 </div>
 

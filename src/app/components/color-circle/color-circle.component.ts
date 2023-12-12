@@ -235,7 +235,48 @@ export class ColorCircleComponent implements DoCheck {
           colors[j].blue = rgbColor.blue        
         }
       }
+    } else if (this.colorSchema == "комплиментарная") {
+      let mainHue = this.i >= 2 ? newHsb.hue : clipHue(newHsb.hue + 180)
+         
+      for (let j = 0; j < 5; j++) {        
+        if (j!= this.i) {
+          let color = RGBToHSB(colors[j])
+          color.hue = j >= 2 ? mainHue : clipHue(mainHue - 180)          
+          color.saturation = this.i == 2 ? clip(color.saturation * dif_satuturation) : color.saturation
+          let rgbColor = HSBtoRGB(color)  
+          colors[j].red = rgbColor.red
+          colors[j].green = rgbColor.green
+          colors[j].blue = rgbColor.blue        
+        }
+      }
+    } else if (this.colorSchema == "сплит-комплиментарная") {
+      let mainHue
+      if (this.i >= 3) {
+        mainHue = newHsb.hue
+      } else if (this.i >= 1) {
+        mainHue = clipHue(newHsb.hue - 210)
+      } else {
+        mainHue = clipHue(newHsb.hue - 150)
+      }
+      for (let j = 0; j < 5; j++) {
+        if (j!= this.i) {
+          let color = RGBToHSB(colors[j])
+          if (j >= 3) {
+            color.hue = mainHue
+          } else if (j >= 1) {
+            color.hue = clipHue(mainHue + 210)
+          } else {
+            color.hue = clipHue(mainHue + 150)
+          }
+          color.saturation = this.i == 3 ? clip(color.saturation * dif_satuturation) : color.saturation
+          let rgbColor = HSBtoRGB(color)  
+          colors[j].red = rgbColor.red
+          colors[j].green = rgbColor.green
+          colors[j].blue = rgbColor.blue        
+        }
+      }
     }
+    
     
 
     for (let j = 0; j < 5; j++) {
