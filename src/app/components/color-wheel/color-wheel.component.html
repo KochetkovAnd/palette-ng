@@ -1,7 +1,7 @@
 <div class="container">
 
-    <select [(ngModel)] ="modelType">
-        <option *ngFor="let schema of colorSchemes" [value]="schema">{{schema}}</option>
+    <select [(ngModel)] ="modelType" (change)="onModelChange()">
+        <option *ngFor="let schema of colorSchemes" [value]="schema">{{schema}} </option>
     </select>
 
     <div class="color-whell-block">

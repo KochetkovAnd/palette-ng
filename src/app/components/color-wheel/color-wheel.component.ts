@@ -44,14 +44,24 @@ export class ColorWheelComponent  {
   closed: boolean[] = []
   colorSchemes: string[] = ['монохроматическая', 'последовательная', 'комплиментарная']
   
-  rgbColors: RGBColor[] = [
-    {red: 255, green: 0, blue:0},
-    {red: 255, green: 51, blue:51},
-    {red: 204, green: 82, blue:82},
-    {red: 204, green: 102, blue:102},
-    {red: 51, green: 31, blue:31}
-    
-  ]
+  rgbColors: RGBColor[] = []
+
+  defaultColors: Record<string, RGBColor[]> = {
+    'монохроматическая': [
+      { red: 204, green: 82, blue: 82 },
+      { red: 255, green: 51, blue: 51 },
+      { red: 255, green: 0, blue: 0 },
+      { red: 204, green: 102, blue: 102 },
+      { red: 51, green: 31, blue: 31 }
+    ],
+    'последовательная': [
+      { red: 46, green: 230, blue: 61 },
+      { red: 46, green: 230, blue: 138 },
+      { red: 46, green: 230, blue: 214 },
+      { red: 46, green: 168, blue: 230 },
+      { red: 46, green: 92, blue: 230 }
+    ]
+  }
 
   getCardStyle(color: RGBColor) {
     return {
@@ -68,7 +78,11 @@ export class ColorWheelComponent  {
     return RGBtoHEX(rgbColor)
   }
 
+  onModelChange() {
+    this.rgbColors = this.defaultColors[this.modelType]
+  }
   ngOnInit() {  
+    this.rgbColors = this.defaultColors[this.modelType]
     this.ctx = this.canvas.nativeElement.getContext('2d');
     if (this.ctx) {
       this.drawColorWheel()

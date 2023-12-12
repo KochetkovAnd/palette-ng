@@ -215,7 +215,20 @@ export class ColorCircleComponent implements DoCheck {
         if (j!= this.i) {
           let color = RGBToHSB(colors[j])
           color.hue = newHsb.hue          
-          // color.saturation = this.i == 2 ? clip(color.saturation * dif_satuturation) : color.saturation
+          color.saturation = this.i == 2 ? clip(color.saturation * dif_satuturation) : color.saturation
+          let rgbColor = HSBtoRGB(color)  
+          colors[j].red = rgbColor.red
+          colors[j].green = rgbColor.green
+          colors[j].blue = rgbColor.blue        
+        }
+      }
+    } else if (this.colorSchema == "последовательная") {
+      let mainHue = clipHue(newHsb.hue + (2-this.i) * 25)
+      for (let j = 0; j < 5; j++) {
+        if (j!= this.i) {
+          let color = RGBToHSB(colors[j])
+          color.hue = clipHue(mainHue - (2 - j) * 25)     
+          color.saturation = this.i == 2 ? clip(color.saturation * dif_satuturation) : color.saturation
           let rgbColor = HSBtoRGB(color)  
           colors[j].red = rgbColor.red
           colors[j].green = rgbColor.green
