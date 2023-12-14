@@ -1,8 +1,8 @@
 import { CdkDrag, CdkDragDrop, CdkDragEnd, CdkDragMove, CdkDragStart } from '@angular/cdk/drag-drop';
 import { Component, ElementRef, SimpleChanges, ViewChild, OnChanges, Input } from '@angular/core';
 import { ColorInPalette } from '../../models/colorInPalette';
-import { WheelColorsService } from '../../services/wheel-colors-service/wheel-colors.service';
 import { RGBColor } from '../../models/colors/rgbColor';
+import { StyleChangerService } from '../../services/style-service/style-changer.service';
 
 function isColorDark(rgbcolor: RGBColor): boolean {
   const brightness = calculateBrightness(rgbcolor);
@@ -44,7 +44,7 @@ export class ColorWheelComponent  {
   closed: boolean[] = []
   colorSchemes: string[] = ['монохроматическая', 'последовательная', 'комплиментарная', 'сплит-комплиментарная']
   
-  rgbColors: RGBColor[] = []
+  @Input()rgbColors: RGBColor[] = []
 
   defaultColors: Record<string, RGBColor[]> = {
     'монохроматическая': [
@@ -76,7 +76,10 @@ export class ColorWheelComponent  {
       { red: 122, green: 61, blue: 61 }
     ]
   }
-
+  
+  constructor (
+    private styleService: StyleChangerService
+  ) {}
   getCardStyle(color: RGBColor) {
     return {
       'background-color': `rgb(${color.red},${color.green},${color.blue})`
@@ -102,6 +105,61 @@ export class ColorWheelComponent  {
       this.drawColorWheel()
     }
   }  
+
+  updateColors() {
+    let colorsInPalette: ColorInPalette[] = []
+    if (this.modelType == "монохроматическая") {
+      colorsInPalette.push({
+        hex: RGBtoHEX(this.rgbColors[3]),
+        colorRole: ""
+      })
+      colorsInPalette.push({
+        hex: RGBtoHEX(this.rgbColors[1]),
+        colorRole: ""
+      })
+      colorsInPalette.push({
+        hex: RGBtoHEX(this.rgbColors[2]),
+        colorRole: ""
+      })
+      colorsInPalette.push({
+        hex: RGBtoHEX(this.rgbColors[0]),
+        colorRole: ""
+      })
+      colorsInPalette.push({
+        hex: RGBtoHEX(this.rgbColors[4]),
+        colorRole: ""
+      })
+
+      let hover = {
+        red: this.rgbColors[4].red + 10,
+        green: this.rgbColors[4].green + 10,
+        blue: this.rgbColors[4].blue + 10,
+      }
+      colorsInPalette.push({
+        hex: RGBtoHEX(hover),
+        colorRole: ""
+      })
+    } else {
+      this.rgbColors.forEach(color => {
+        colorsInPalette.push({
+          hex: RGBtoHEX(color),
+          colorRole: ""
+        })
+      })
+      let hover = {
+        red: this.rgbColors[4].red + 10,
+        green: this.rgbColors[4].green + 10,
+        blue: this.rgbColors[4].blue + 10,
+      }
+      colorsInPalette.push({
+        hex: RGBtoHEX(hover),
+        colorRole: ""
+      })
+    }
+  
+    this.styleService.setColors(colorsInPalette)
+    this.styleService.recolor()
+  }
 
   drawColorWheel() {
     if (this.ctx) {

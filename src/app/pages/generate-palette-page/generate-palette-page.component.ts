@@ -1,6 +1,7 @@
 import { Component, Renderer2, RendererFactory2 } from '@angular/core';
 import { Palette } from '../../models/palette';
 import { StyleChangerService } from '../../services/style-service/style-changer.service';
+import { RGBColor } from '../../models/colors/rgbColor';
 
 @Component({
   selector: 'app-generate-palette-page',
@@ -16,6 +17,8 @@ export class GeneratePalettePageComponent {
     private styleService: StyleChangerService
   ) { }
 
+  rgbColors: RGBColor[] = []
+
   palette: Palette = {
     id: undefined,
     name: "",
@@ -27,6 +30,6 @@ export class GeneratePalettePageComponent {
   }
 
   test() {   
-    this.styleService.recolor() 
+    console.log(this.rgbColors)
   }  
 }

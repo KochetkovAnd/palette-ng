@@ -24,9 +24,14 @@
             </div>
         </div>       
     </div>
+
+    <div class="button-line">
+        <select [(ngModel)] ="modelType" (change)="onModelChange()">
+            <option *ngFor="let schema of colorSchemes" [value]="schema">{{schema}} </option>
+        </select>
+        <button (click) = "updateColors()">Применить</button>
+        <button>Сохранить</button>
+    </div>    
     
-    <select [(ngModel)] ="modelType" (change)="onModelChange()">
-        <option *ngFor="let schema of colorSchemes" [value]="schema">{{schema}} </option>
-    </select>
 </div>
 

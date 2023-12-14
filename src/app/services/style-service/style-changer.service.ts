@@ -12,6 +12,7 @@ export class StyleChangerService {
   default_main_brand_color = "7777FC"
   default_dark_accent = "191D21"
   default_dark_shades = "0C0C28"
+  default_dark_shades_hover = "0F0F33"
 
 
 
@@ -20,6 +21,7 @@ export class StyleChangerService {
   main_brand_color: string = this.default_main_brand_color
   dark_accent: string = this.default_dark_accent
   dark_shades: string = this.default_dark_shades
+  dark_shades_hover: string = this.default_dark_shades_hover
 
   setColors(colorInPalettes: ColorInPalette[]) {
     this.light_shades = colorInPalettes[0].hex
@@ -27,6 +29,7 @@ export class StyleChangerService {
     this.main_brand_color = colorInPalettes[2].hex
     this.dark_accent = colorInPalettes[3].hex
     this.dark_shades = colorInPalettes[4].hex
+    this.dark_shades_hover = colorInPalettes[5].hex
   }
 
   recolor() {
@@ -35,6 +38,7 @@ export class StyleChangerService {
     this.updateGlobalVariable('main_brand_color', "#" + this.main_brand_color)
     this.updateGlobalVariable('dark_accent', "#" + this.dark_accent)
     this.updateGlobalVariable('dark_shades', "#" + this.dark_shades)
+    this.updateGlobalVariable('dark_shades_hover', "#" + this.dark_shades_hover)
   }
 
   reset() {
@@ -43,6 +47,7 @@ export class StyleChangerService {
     this.updateGlobalVariable('main_brand_color', "#" + this.default_main_brand_color)
     this.updateGlobalVariable('dark_accent', "#" + this.default_dark_accent)
     this.updateGlobalVariable('dark_shades', "#" + this.default_dark_shades)
+    this.updateGlobalVariable('dark_shades_hover', "#" + this.default_dark_shades_hover)
   }
 
   updateGlobalVariable(name: string, value: string) {

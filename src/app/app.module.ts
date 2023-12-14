@@ -17,8 +17,8 @@ import { GenerateBlockComponent } from './components/generate-block/generate-blo
 import { StyleChangerService } from './services/style-service/style-changer.service';
 import { GenerateBlockSimpleComponent } from './components/generate-block-simple/generate-block-simple.component';
 import { ColorWheelComponent } from './components/color-wheel/color-wheel.component';
-import { TestComponent } from './components/test/test.component';
 import { ColorCircleComponent } from './components/color-circle/color-circle.component';
+import { ColorDescriptionBlockComponent } from './components/color-description-block/color-description-block.component';
 
 @NgModule({
   declarations: [
@@ -31,8 +31,8 @@ import { ColorCircleComponent } from './components/color-circle/color-circle.com
     GenerateBlockComponent,
     GenerateBlockSimpleComponent,
     ColorWheelComponent,
-    TestComponent,
-    ColorCircleComponent
+    ColorCircleComponent,
+    ColorDescriptionBlockComponent
   ],
   imports: [
     BrowserModule,

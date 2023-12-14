@@ -1,0 +1,16 @@
+$border_radius: 10px;
+$default_transition: 0.3s ease-in-out;
+
+
+.container {
+    width: 100%;
+    height: 400px;
+    background-color: var(--light_shades);
+}
+
+.line {
+    margin: 25px 10%;
+    width: 80%;
+    height: 300px;
+    display: flex;  
+}

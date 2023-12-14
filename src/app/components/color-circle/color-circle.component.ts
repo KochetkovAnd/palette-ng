@@ -2,7 +2,6 @@ import { CdkDragEnd, CdkDragMove, CdkDragStart } from '@angular/cdk/drag-drop';
 import { Component, Input, DoCheck } from '@angular/core';
 import { HSBColor } from '../../models/colors/hsbColor';
 import { RGBColor } from '../../models/colors/rgbColor';
-import { WheelColorsService } from '../../services/wheel-colors-service/wheel-colors.service';
 import { ColorInPalette } from '../../models/colorInPalette';
 
 
