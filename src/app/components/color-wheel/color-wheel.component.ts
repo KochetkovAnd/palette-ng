@@ -1,8 +1,12 @@
-import { CdkDrag, CdkDragDrop, CdkDragEnd, CdkDragMove, CdkDragStart } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, CdkDragEnd, CdkDragMove, CdkDragStart, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, ElementRef, SimpleChanges, ViewChild, OnChanges, Input } from '@angular/core';
 import { ColorInPalette } from '../../models/colorInPalette';
 import { RGBColor } from '../../models/colors/rgbColor';
 import { StyleChangerService } from '../../services/style-service/style-changer.service';
+import { Palette } from '../../models/palette';
+import { HttpService } from '../../services/http-service/http.service';
+import { Tag } from '../../models/tag';
+import { lastValueFrom } from 'rxjs';
 
 function isColorDark(rgbcolor: RGBColor): boolean {
   const brightness = calculateBrightness(rgbcolor);
@@ -39,6 +43,19 @@ export class ColorWheelComponent  {
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
 
   private ctx: CanvasRenderingContext2D | null = null
+  availableTags: Tag[] = []
+
+  isSave = false
+
+  palette: Palette = {
+    id: undefined,
+    name: "",
+    private: true,
+    modelType: "monochrome",
+    creator: undefined,
+    tags: [],
+    colorInPalettes: []
+  }
 
   modelType: string = "монохроматическая"
   closed: boolean[] = []
@@ -78,7 +95,8 @@ export class ColorWheelComponent  {
   }
   
   constructor (
-    private styleService: StyleChangerService
+    private styleService: StyleChangerService,
+    private httpService: HttpService
   ) {}
   getCardStyle(color: RGBColor) {
     return {
@@ -98,7 +116,8 @@ export class ColorWheelComponent  {
   onModelChange() {
     this.rgbColors = this.defaultColors[this.modelType]
   }
-  ngOnInit() {  
+  async ngOnInit() {  
+    this.availableTags = await lastValueFrom(this.httpService.getAllTags())
     this.rgbColors = this.defaultColors[this.modelType]
     this.ctx = this.canvas.nativeElement.getContext('2d');
     if (this.ctx) {
@@ -161,6 +180,45 @@ export class ColorWheelComponent  {
     this.styleService.recolor()
   }
 
+  openSave() {
+
+    this.palette.modelType = this.modelType
+    this.palette.colorInPalettes = []
+    this.rgbColors.forEach(color =>{
+      this.palette.colorInPalettes.push({
+        hex: RGBtoHEX(color),
+        colorRole: ""
+      })
+    })
+    this.palette.colorInPalettes[0].colorRole = "Светлые тени"
+    this.palette.colorInPalettes[1].colorRole = "Светлый акцент"
+    this.palette.colorInPalettes[2].colorRole = "Главный цвет"
+    this.palette.colorInPalettes[3].colorRole = "Темный акцент"
+    this.palette.colorInPalettes[4].colorRole = "Темные тени"   
+    
+    this.isSave = true
+  }
+
+  closeSave() {
+    this.isSave = false
+  }
+
+  save() {
+    console.log(this.palette)
+  }
+
+  drop(event: CdkDragDrop<Tag[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }
   drawColorWheel() {
     if (this.ctx) {
       const centerX = this.ctx.canvas.width / 2;
