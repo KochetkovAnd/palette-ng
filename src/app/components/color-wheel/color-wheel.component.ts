@@ -6,7 +6,7 @@ import { StyleChangerService } from '../../services/style-service/style-changer.
 import { Palette } from '../../models/palette';
 import { HttpService } from '../../services/http-service/http.service';
 import { Tag } from '../../models/tag';
-import { lastValueFrom } from 'rxjs';
+import { last, lastValueFrom } from 'rxjs';
 
 function isColorDark(rgbcolor: RGBColor): boolean {
   const brightness = calculateBrightness(rgbcolor);
@@ -47,12 +47,10 @@ export class ColorWheelComponent  {
 
   isSave = false
 
-  palette: Palette = {
-    id: undefined,
+  palette: Palette = {    
     name: "",
     private: true,
-    modelType: "monochrome",
-    creator: undefined,
+    modelType: "монохроматическая",
     tags: [],
     colorInPalettes: []
   }
@@ -181,6 +179,7 @@ export class ColorWheelComponent  {
   }
 
   openSave() {
+    this.reset()
 
     this.palette.modelType = this.modelType
     this.palette.colorInPalettes = []
@@ -203,8 +202,13 @@ export class ColorWheelComponent  {
     this.isSave = false
   }
 
-  save() {
-    console.log(this.palette)
+  reset() {
+    this.styleService.reset()
+  }
+
+  async save() {
+    await lastValueFrom(this.httpService.createPalette(this.palette))
+    this.closeSave()
   }
 
   drop(event: CdkDragDrop<Tag[]>) {

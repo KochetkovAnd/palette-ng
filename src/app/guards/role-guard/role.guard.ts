@@ -20,7 +20,9 @@ class PermissionService {
       switch (next.routeConfig?.path) {
         case 'palettes':
           return isUser
-        case 'generate_pallete':
+        case 'generate_palette':
+          return isUser
+        case 'generate_wheel_palette':
           return isUser
       }
     }

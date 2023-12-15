@@ -61,4 +61,11 @@ export class HttpService {
     return this.http.get<Tag[]>(this.baseURL + "/tag",
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   }
+
+  //Palettes
+
+  createPalette(palette: Palette) {
+    return this.http.post<Palette>(this.baseURL + "/palette/create", palette,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
 }

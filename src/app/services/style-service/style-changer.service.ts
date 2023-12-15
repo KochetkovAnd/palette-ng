@@ -7,8 +7,8 @@ import { ColorInPalette } from '../../models/colorInPalette';
 export class StyleChangerService {
 
 
-  default_light_shades = "FAFBF8"
-  default_light_accent = "B5BCC2"
+  default_light_shades = "ECEBED"
+  default_light_accent = "5574C4"
   default_main_brand_color = "7777FC"
   default_dark_accent = "191D21"
   default_dark_shades = "0C0C28"

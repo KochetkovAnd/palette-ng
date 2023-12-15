@@ -10,26 +10,4 @@ import { RGBColor } from '../../models/colors/rgbColor';
 })
 export class GeneratePalettePageComponent {
 
-
-  
-  
-  constructor(
-    private styleService: StyleChangerService
-  ) { }
-
-  rgbColors: RGBColor[] = []
-
-  palette: Palette = {
-    id: undefined,
-    name: "",
-    private: true,
-    modelType: "monochrome",
-    creator: undefined,
-    tags: [],
-    colorInPalettes: []
-  }
-
-  test() {   
-    console.log(this.rgbColors)
-  }  
 }

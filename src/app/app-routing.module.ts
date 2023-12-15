@@ -4,6 +4,7 @@ import { LoginBlockComponent } from './components/login-block/login-block.compon
 import { PalettePageComponent } from './pages/palette-page/palette-page.component';
 import { roleGuard } from './guards/role-guard/role.guard';
 import { GeneratePalettePageComponent } from './pages/generate-palette-page/generate-palette-page.component';
+import { GenerateWheelPalettePageComponent } from './pages/generate-wheel-palette-page/generate-wheel-palette-page.component';
 
 const routes: Routes = [
   {
@@ -16,9 +17,14 @@ const routes: Routes = [
     component: PalettePageComponent
   },
   {
-    path: "generate_pallete",
+    path: "generate_palette",
     canActivate: [roleGuard],
     component: GeneratePalettePageComponent
+  },
+  {
+    path: "generate_wheel_palette",
+    canActivate: [roleGuard],
+    component: GenerateWheelPalettePageComponent
   },
   {path: '**', redirectTo: '/login', pathMatch: 'full'}
 ];
