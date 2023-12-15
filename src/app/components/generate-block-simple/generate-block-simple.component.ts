@@ -31,13 +31,11 @@ export class GenerateBlockSimpleComponent {
     private styleService: StyleChangerService
   ) {}
 
-  @Input() colorsInPalette: ColorInPalette[]  = []
+  colorsInPalette: ColorInPalette[]  = []
   closed: boolean[] = []
 
   async ngOnInit() {  
-    this.styleService.reset()   
     this.colorsInPalette = await lastValueFrom(this.httpService.generate(this.colorsInPalette, "monochrome"))       
-    this.styleService.setColors(this.colorsInPalette)   
     this.closed = []
     for (let i = 0; i < this.colorsInPalette.length; i++ ) {this.closed.push(false)}
   }
@@ -58,13 +56,22 @@ export class GenerateBlockSimpleComponent {
   }
 
   async regenerate(){
-    this.styleService.reset()
     for (let i = 0; i < this.closed.length; i++) {
       if (!this.closed[i]) {
         this.colorsInPalette[i].hex = ""
       }
     }
     this.colorsInPalette = await lastValueFrom(this.httpService.generate(this.colorsInPalette, "monochrome"))  
-    this.styleService.setColors(this.colorsInPalette) 
-  }  
+    
+  }
+  
+  useSchema() {
+    this.styleService.setColors(this.colorsInPalette)
+    this.styleService.recolor() 
+  }
+
+  reset() {
+    this.styleService.reset()
+    this.styleService.recolor() 
+  }
 }

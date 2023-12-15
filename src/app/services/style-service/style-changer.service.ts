@@ -1,9 +1,28 @@
 import { ElementRef, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { ColorInPalette } from '../../models/colorInPalette';
+import { RGBColor } from '../../models/colors/rgbColor';
+
+function HEXtoRGB(hex: string): RGBColor {
+  const bigint = parseInt(hex, 16);
+  const red = (bigint >> 16) & 255;
+  const green = (bigint >> 8) & 255;
+  const blue = bigint & 255;
+  return { red, green, blue }
+}
+
+
+function RGBtoHEX(rgbColor: RGBColor): string {
+  const hexR = rgbColor.red.toString(16).padStart(2, '0');
+  const hexG = rgbColor.green.toString(16).padStart(2, '0');
+  const hexB = rgbColor.blue.toString(16).padStart(2, '0');
+
+  return `${hexR}${hexG}${hexB}`;
+}
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class StyleChangerService {
 
 
@@ -24,12 +43,21 @@ export class StyleChangerService {
   dark_shades_hover: string = this.default_dark_shades_hover
 
   setColors(colorInPalettes: ColorInPalette[]) {
+    let dark_shadesRGB = HEXtoRGB(colorInPalettes[4].hex)
+
     this.light_shades = colorInPalettes[0].hex
     this.light_accent = colorInPalettes[1].hex
     this.main_brand_color = colorInPalettes[2].hex
     this.dark_accent = colorInPalettes[3].hex
     this.dark_shades = colorInPalettes[4].hex
-    this.dark_shades_hover = colorInPalettes[5].hex
+    
+    this.dark_shades_hover = RGBtoHEX({
+      red: dark_shadesRGB.red + 10,
+      green: dark_shadesRGB.green + 10,
+      blue: dark_shadesRGB.blue + 10,
+    })
+    
+    
   }
 
   recolor() {

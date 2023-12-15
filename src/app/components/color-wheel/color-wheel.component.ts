@@ -145,33 +145,14 @@ export class ColorWheelComponent  {
       colorsInPalette.push({
         hex: RGBtoHEX(this.rgbColors[4]),
         colorRole: ""
-      })
-
-      let hover = {
-        red: this.rgbColors[4].red + 10,
-        green: this.rgbColors[4].green + 10,
-        blue: this.rgbColors[4].blue + 10,
-      }
-      colorsInPalette.push({
-        hex: RGBtoHEX(hover),
-        colorRole: ""
-      })
+      })      
     } else {
       this.rgbColors.forEach(color => {
         colorsInPalette.push({
           hex: RGBtoHEX(color),
           colorRole: ""
         })
-      })
-      let hover = {
-        red: this.rgbColors[4].red + 10,
-        green: this.rgbColors[4].green + 10,
-        blue: this.rgbColors[4].blue + 10,
-      }
-      colorsInPalette.push({
-        hex: RGBtoHEX(hover),
-        colorRole: ""
-      })
+      })      
     }
   
     this.styleService.setColors(colorsInPalette)
