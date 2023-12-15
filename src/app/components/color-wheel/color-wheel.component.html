@@ -34,58 +34,5 @@
     </div>    
     
 </div>
-
-<div class="back" *ngIf = "isSave" >
-    <div class="save-block">
-        <button class="button-back" (click)="closeSave()">Назад</button>
-        <div class="save-color-line">
-            <div class="block" *ngFor="let color of palette.colorInPalettes">
-                <div class="color" [ngStyle]="{'background-color': '#' + color.hex}"></div>
-                <a class="hex">#{{color.hex}}</a>
-                <input type="text" class="colorRole" [(ngModel)]="color.colorRole" placeholder="роль цвета">
-            </div>
-        </div>
-        <div class="sides">
-            <div class="left-side">
-                <input type="text" class="paletteName" [(ngModel)]="palette.name" placeholder="Имя палитры">
-                 <div class="tags">
-                    <div class="tag">
-                        <a>Теги</a>
-                        <div 
-                            class="tag-list" 
-                            cdkDropList
-                            #markList="cdkDropList"
-                            [cdkDropListData]="palette.tags"
-                            [cdkDropListConnectedTo]="[unmarkList]"
-                            (cdkDropListDropped)="drop($event)">
-                            <div class="tag-item" *ngFor="let tag of palette.tags" cdkDrag> {{tag.name}}</div>
-                        </div>
-                    </div>
-                    <div class="tag">
-                        <a>Доступные теги</a>
-                        <div 
-                            class="tag-list" 
-                            cdkDropList 
-                            #unmarkList="cdkDropList"
-                            [cdkDropListData]="availableTags" 
-                            [cdkDropListConnectedTo]="[markList]"
-                            (cdkDropListDropped)="drop($event)">
-                            <div class="tag-item" *ngFor="let tag of availableTags" cdkDrag> {{tag.name}}</div>
-                        </div>
-                    </div>
-                </div>
-            </div> 
-            <div class="right-side">
-                <div class="switch-block">
-                    <a>Приватная</a>
-                    <label class="switch">
-                        <input type="checkbox" [(ngModel)]="palette.private">
-                        <span class="sliderr round"></span>
-                      </label>
-                </div>
-                <button (click)="save()">Сохранить</button>
-            </div>
-        </div>        
-    </div>
-</div>
+<save-block [isVisible]="isSave" [palette]="palette" (isVisibleEvent)="closeSave()"></save-block>
 

@@ -43,9 +43,8 @@ export class ColorWheelComponent  {
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
 
   private ctx: CanvasRenderingContext2D | null = null
-  availableTags: Tag[] = []
 
-  isSave = false
+  isSave: boolean = false
 
   palette: Palette = {    
     name: "",
@@ -114,8 +113,7 @@ export class ColorWheelComponent  {
   onModelChange() {
     this.rgbColors = this.defaultColors[this.modelType]
   }
-  async ngOnInit() {  
-    this.availableTags = await lastValueFrom(this.httpService.getAllTags())
+  async ngOnInit() { 
     this.rgbColors = this.defaultColors[this.modelType]
     this.ctx = this.canvas.nativeElement.getContext('2d');
     if (this.ctx) {
@@ -157,6 +155,7 @@ export class ColorWheelComponent  {
   
     this.styleService.setColors(colorsInPalette)
     this.styleService.recolor()
+    console.log(this.isSave)
   }
 
   openSave() {
@@ -174,23 +173,18 @@ export class ColorWheelComponent  {
     this.palette.colorInPalettes[1].colorRole = "Светлый акцент"
     this.palette.colorInPalettes[2].colorRole = "Главный цвет"
     this.palette.colorInPalettes[3].colorRole = "Темный акцент"
-    this.palette.colorInPalettes[4].colorRole = "Темные тени"   
-    
-    this.isSave = true
+    this.palette.colorInPalettes[4].colorRole = "Темные тени"
+    this.isSave = !this.isSave
   }
 
   closeSave() {
-    this.isSave = false
+    this.isSave = !this.isSave
   }
 
   reset() {
     this.styleService.reset()
   }
 
-  async save() {
-    await lastValueFrom(this.httpService.createPalette(this.palette))
-    this.closeSave()
-  }
 
   drop(event: CdkDragDrop<Tag[]>) {
     if (event.previousContainer === event.container) {

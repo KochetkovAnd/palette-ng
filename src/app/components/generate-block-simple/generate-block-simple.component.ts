@@ -3,6 +3,7 @@ import { HttpService } from '../../services/http-service/http.service';
 import { StyleChangerService } from '../../services/style-service/style-changer.service';
 import { ColorInPalette } from '../../models/colorInPalette';
 import { lastValueFrom } from 'rxjs';
+import { Palette } from '../../models/palette';
 
 function isColorDark(color:string): boolean {
   const brightness = calculateBrightness(color);
@@ -32,7 +33,15 @@ export class GenerateBlockSimpleComponent {
   ) {}
 
   colorsInPalette: ColorInPalette[]  = []
+  palette: Palette = {    
+    name: "",
+    private: true,
+    modelType: "монохроматическая",
+    tags: [],
+    colorInPalettes: this.colorsInPalette
+  }
   closed: boolean[] = []
+  isSave = false
 
   async ngOnInit() {  
     this.colorsInPalette = await lastValueFrom(this.httpService.generate(this.colorsInPalette, "monochrome"))       
@@ -73,5 +82,14 @@ export class GenerateBlockSimpleComponent {
   reset() {
     this.styleService.reset()
     this.styleService.recolor() 
+  }
+
+  openSave() {
+    this.palette.colorInPalettes = this.colorsInPalette
+    this.isSave = !this.isSave
+  }
+
+  closeSave() {
+    this.isSave = !this.isSave
   }
 }

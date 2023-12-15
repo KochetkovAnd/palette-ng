@@ -15,7 +15,8 @@
         
         <button (click)="useSchema()" style="margin-left: calc(50% - 170px);">Применить</button>
         <img src="assets/reset.png" >
-        <button style="margin-right: 0px; margin-left: calc(50% - 390px);">Сохранить</button>
+        <button (click)="openSave()" style="margin-right: 0px; margin-left: calc(50% - 390px);">Сохранить</button>
 
     </div>    
 </div>
+<save-block [isVisible]="isSave" [palette]="palette" (isVisibleEvent)="closeSave()"></save-block>

@@ -20,7 +20,7 @@ import { ColorWheelComponent } from './components/color-wheel/color-wheel.compon
 import { ColorCircleComponent } from './components/color-circle/color-circle.component';
 import { ColorDescriptionBlockComponent } from './components/color-description-block/color-description-block.component';
 import { GenerateWheelPalettePageComponent } from './pages/generate-wheel-palette-page/generate-wheel-palette-page.component';
-
+import { SaveBlockComponent } from './components/save-block/save-block.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +34,8 @@ import { GenerateWheelPalettePageComponent } from './pages/generate-wheel-palett
     ColorWheelComponent,
     ColorCircleComponent,
     ColorDescriptionBlockComponent,
-    GenerateWheelPalettePageComponent
+    GenerateWheelPalettePageComponent,
+    SaveBlockComponent,
   ],
   imports: [
     BrowserModule,
