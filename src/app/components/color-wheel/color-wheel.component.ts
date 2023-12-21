@@ -107,7 +107,7 @@ export class ColorWheelComponent  {
   }
 
   getHEX(rgbColor : RGBColor) {
-    return RGBtoHEX(rgbColor)
+    return RGBtoHEX(rgbColor).toUpperCase()
   }
 
   onModelChange() {
@@ -165,7 +165,7 @@ export class ColorWheelComponent  {
     this.palette.colorInPalettes = []
     this.rgbColors.forEach(color =>{
       this.palette.colorInPalettes.push({
-        hex: RGBtoHEX(color),
+        hex: RGBtoHEX(color).toUpperCase(),
         colorRole: ""
       })
     })

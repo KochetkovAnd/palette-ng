@@ -60,6 +60,8 @@ export class GenerateBlockSimpleComponent {
     return {'color': color}
   }
 
+  
+
   change(i: number) {
     this.closed[i] = !this.closed[i]
   }
@@ -81,7 +83,7 @@ export class GenerateBlockSimpleComponent {
 
   reset() {
     this.styleService.reset()
-    this.styleService.recolor() 
+    //this.styleService.recolor() 
   }
 
   openSave() {

@@ -2,6 +2,10 @@ import { ElementRef, Injectable, Renderer2, RendererFactory2 } from '@angular/co
 import { ColorInPalette } from '../../models/colorInPalette';
 import { RGBColor } from '../../models/colors/rgbColor';
 
+function clip(x:number):number {
+  return Math.max(0,Math.min(255, x))
+}
+
 function HEXtoRGB(hex: string): RGBColor {
   const bigint = parseInt(hex, 16);
   const red = (bigint >> 16) & 255;
@@ -29,6 +33,7 @@ export class StyleChangerService {
   default_light_shades = "ECEBED"
   default_light_accent = "5574C4"
   default_main_brand_color = "7777FC"
+  default_main_brand_color_hover = "6F6FED"
   default_dark_accent = "191D21"
   default_dark_shades = "0C0C28"
   default_dark_shades_hover = "0F0F33"
@@ -38,12 +43,14 @@ export class StyleChangerService {
   light_shades: string = this.default_light_shades
   light_accent: string = this.default_light_accent
   main_brand_color: string = this.default_main_brand_color
+  main_brand_color_hover: string = this.default_main_brand_color_hover
   dark_accent: string = this.default_dark_accent
   dark_shades: string = this.default_dark_shades
   dark_shades_hover: string = this.default_dark_shades_hover
 
   setColors(colorInPalettes: ColorInPalette[]) {
     let dark_shadesRGB = HEXtoRGB(colorInPalettes[4].hex)
+    let main_colorRGB = HEXtoRGB(colorInPalettes[2].hex)
 
     this.light_shades = colorInPalettes[0].hex
     this.light_accent = colorInPalettes[1].hex
@@ -56,6 +63,12 @@ export class StyleChangerService {
       green: dark_shadesRGB.green + 10,
       blue: dark_shadesRGB.blue + 10,
     })
+
+    this.main_brand_color_hover = RGBtoHEX({
+      red: clip(main_colorRGB.red - 5),
+      green: clip(main_colorRGB.green - 5),
+      blue: clip(main_colorRGB.blue - 5),
+    })
     
     
   }
@@ -64,6 +77,7 @@ export class StyleChangerService {
     this.updateGlobalVariable('light_shades', "#" + this.light_shades)
     this.updateGlobalVariable('light_accent', "#" + this.light_accent)
     this.updateGlobalVariable('main_brand_color', "#" + this.main_brand_color)
+    this.updateGlobalVariable('main_brand_color_hover', "#" + this.main_brand_color_hover)
     this.updateGlobalVariable('dark_accent', "#" + this.dark_accent)
     this.updateGlobalVariable('dark_shades', "#" + this.dark_shades)
     this.updateGlobalVariable('dark_shades_hover', "#" + this.dark_shades_hover)
@@ -73,6 +87,7 @@ export class StyleChangerService {
     this.updateGlobalVariable('light_shades', "#" + this.default_light_shades)
     this.updateGlobalVariable('light_accent', "#" + this.default_light_accent)
     this.updateGlobalVariable('main_brand_color', "#" + this.default_main_brand_color)
+    this.updateGlobalVariable('main_brand_color_hover', "#" + this.default_main_brand_color_hover)
     this.updateGlobalVariable('dark_accent', "#" + this.default_dark_accent)
     this.updateGlobalVariable('dark_shades', "#" + this.default_dark_shades)
     this.updateGlobalVariable('dark_shades_hover', "#" + this.default_dark_shades_hover)

@@ -30,7 +30,8 @@
             <option *ngFor="let schema of colorSchemes" [value]="schema">{{schema}} </option>
         </select>
         <button (click) = "updateColors()">Применить</button>
-        <button (click) = "openSave()" >Сохранить</button>
+        <img src="assets/reset.png" (click)="reset()">
+        <button (click) = "openSave()" style="margin-left: calc(50% - 520px);">Сохранить</button>
     </div>    
     
 </div>
