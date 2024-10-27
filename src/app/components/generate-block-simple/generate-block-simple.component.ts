@@ -28,20 +28,11 @@ function HEXtoRGB(hex:string): {r: number, g: number, b: number} {
 })
 export class GenerateBlockSimpleComponent {
   constructor(
-    private httpService: HttpService,
-    private styleService: StyleChangerService
+    private httpService: HttpService
   ) {}
 
   colorsInPalette: ColorInPalette[]  = []
-  palette: Palette = {    
-    name: "",
-    private: true,
-    modelType: "монохроматическая",
-    tags: [],
-    colorInPalettes: this.colorsInPalette
-  }
   closed: boolean[] = []
-  isSave = false
 
   async ngOnInit() {  
     this.colorsInPalette = await lastValueFrom(this.httpService.generate(this.colorsInPalette, "monochrome"))       
@@ -60,38 +51,11 @@ export class GenerateBlockSimpleComponent {
     return {'color': color}
   }
 
-  
-
   change(i: number) {
     this.closed[i] = !this.closed[i]
   }
 
-  async regenerate(){
-    for (let i = 0; i < this.closed.length; i++) {
-      if (!this.closed[i]) {
-        this.colorsInPalette[i].hex = ""
-      }
-    }
-    this.colorsInPalette = await lastValueFrom(this.httpService.generate(this.colorsInPalette, "monochrome"))  
-    
-  }
-  
-  useSchema() {
-    this.styleService.setColors(this.colorsInPalette)
-    this.styleService.recolor() 
-  }
-
-  reset() {
-    this.styleService.reset()
-    //this.styleService.recolor() 
-  }
-
-  openSave() {
-    this.palette.colorInPalettes = this.colorsInPalette
-    this.isSave = !this.isSave
-  }
-
-  closeSave() {
-    this.isSave = !this.isSave
+  refillColors(colors: ColorInPalette[]) {
+    this.colorsInPalette = colors
   }
 }

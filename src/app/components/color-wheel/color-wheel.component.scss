@@ -1,8 +1,6 @@
 $border_radius: 10px;
 $default_transition: 0.3s ease-in-out;
 
-
-
 .container {
     width: 100%;
     height: 550px;
@@ -13,8 +11,7 @@ $default_transition: 0.3s ease-in-out;
 .color-whell-block {
     width: 500px;
     height: 500px;
-    margin: 25px calc(25% - 250px);
-    
+    margin: 25px calc(50% - 480px);    
 }
 
 .container canvas {
@@ -24,53 +21,22 @@ $default_transition: 0.3s ease-in-out;
 }
 
 .color-line {
-    width: calc(50% - 25px);
+    width: 200px;
     height: 500px;
-    margin: 25px 0px;
+    margin: 25px 10px;
 }
 
 .card { 
     width: 100%;
     height: 90px;
-    padding: 5px;
-    display: flex;
+    margin: 10px 0;
 }
 
-.card .color {
-    
-    width: 180px;
+.card .color {    
+    width: 200px;
     height: 90px;
     border-radius: $border_radius;
 }
-
-.card .sliders {
-    margin-left: 20px;
-    margin-top: 10px;
-    display: block;
-    width: calc(100% - 220px);
-}
-
-.slider-block {
-    height: 20px;
-    display: flex;
-}
-
-.slider-block a {
-    display: block;
-    line-height: 20px;
-    color: var(--light_text);
-    width: 30px;
-    justify-content: center;
-}
-
-.slider-block
-
-.slider {
-    width: 100%;
-    height: 20px;
-}
-
-
 
 .card .color a {
     display: block;
@@ -81,65 +47,12 @@ $default_transition: 0.3s ease-in-out;
     font-weight: bold;
 }
 
-
-
-.main {
-    
+.main {    
     width: 100%;
-    height: 650px;
-    background-color: var(--dark_shades_hover);
-    
-    
+    height: 550px;
+    background-color: var(--dark_shades_hover);   
 }
 
-.button-line {
-    display: flex;
-    height: 70px;
-    width: 100%;
+vertical-palette-bar {
+    margin: 25px 10px;
 }
-
-.button-line button {
-    width: 200px;
-    height: 50px;
-    font-size: 15px;
-    margin: 10px 5px;
-    color: var(--light_text);
-    background-color: var(--main_brand_color);
-    border: none;
-    border-radius: $border_radius;
-}
-
-.button-line img {
-    margin: 10px;
-    width: 24px;
-    height: 24px;
-    padding: 13px;
-    border-radius: $border_radius;
-    object-fit: cover;
-    background-color: var(--main_brand_color);
-}
-
-.button-line button:hover {
-    transition: $default_transition;
-    background-color: var(--main_brand_color_hover);
-}
-
-
-select {
-    margin: 10px calc(25% - 100px);
-    width: 200px;
-    height: 50px;
-    padding: 5px;
-    font-size: 15px;
-    color: var(--light_text);
-    box-shadow: 3px 3px 2px 2px rgba(0,0,0,0.25);
-    background-color: var(--main_brand_color);
-    border: none;
-    outline: none;
-    border-radius: $border_radius;
-}
-
-select option:checked  {
-    background-color: var(--main_brand_color);
-}
-

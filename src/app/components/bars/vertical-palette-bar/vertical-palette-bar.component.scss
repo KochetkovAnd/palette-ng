@@ -1,0 +1,54 @@
+$border_radius: 10px;
+$default_transition: 0.3s ease-in-out;
+
+
+.buttons {
+    width: 220px;
+    height: 320px;
+    overflow: hidden;
+    display: block;
+}
+
+button, img {
+    box-shadow: 3px 3px 2px 2px rgba(0,0,0,0.25);
+    background-color: var(--main_brand_color);
+    border-radius: $border_radius;
+    border: none;
+    margin: 10px;
+}
+
+.buttons button{
+    font-size: 15px; 
+    width: 200px;
+    height: 60px;
+    color: var(--light_text);
+}
+.buttons img {   
+    width: 30px;
+    height: 30px;
+    padding: 15px;    
+    object-fit: cover;
+}
+
+.buttons button:hover, .buttons img:hover  {
+    transition: $default_transition;
+    background-color: var(--main_brand_color_hover);
+}
+
+select {
+    margin: 10px;
+    width: 200px;
+    height: 60px;
+    padding: 5px;
+    font-size: 15px;
+    color: var(--light_text);
+    box-shadow: 3px 3px 2px 2px rgba(0,0,0,0.25);
+    background-color: var(--main_brand_color);
+    border: none;
+    outline: none;
+    border-radius: $border_radius;
+}
+
+select option:checked  {
+    background-color: var(--main_brand_color);
+}

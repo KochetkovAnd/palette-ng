@@ -1,0 +1,4 @@
+<button (click)="openSave()">
+    Сохранить    
+</button>
+<save-block *ngIf="isSave" [palette]="palette" (isVisibleEvent)="closeSave()"></save-block>

@@ -1,0 +1,8 @@
+<div class="buttons">
+    <select [(ngModel)] ="modelType" (change)="onModelChange()">
+        <option *ngFor="let schema of colorSchemes" [value]="schema">{{schema}} </option>
+    </select>
+    <button (click) = "useSchema()">Применить</button>
+    <save-button [colorInPalettes]="getColorInPalette()" ></save-button>
+    <img src="assets/reset.png" (click)="reset()">    
+</div>   

@@ -8,15 +8,6 @@
                 <img src="assets/open-lock.png"*ngIf="!closed[i]" (click)="change(i)">                 
             </div>
         </div>
-    </div>
-    <div class="buttons">
-        <img src="assets/regenerate.png" (click)="regenerate()" style="margin-left: 0px;">
-
-        
-        <button (click)="useSchema()" style="margin-left: calc(50% - 170px);">Применить</button>
-        <img src="assets/reset.png" (click)="reset()">
-        <button (click)="openSave()" style="margin-right: 0px; margin-left: calc(50% - 390px);">Сохранить</button>
-
-    </div>    
+    </div>   
+    <horizontal-palette-bar [closed] = "closed" [colorsInPalette] = "colorsInPalette" (newColorsInPalette)="refillColors($event)"></horizontal-palette-bar>
 </div>
-<save-block [isVisible]="isSave" [palette]="palette" (isVisibleEvent)="closeSave()"></save-block>

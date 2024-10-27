@@ -8,32 +8,9 @@
             <div class="card" *ngFor="let rgbColor of rgbColors; let i = index">
                 <div class="color" [ngStyle]="getCardStyle(rgbColor)">
                     <a [ngStyle]="getTextColor(rgbColor)"> #{{getHEX(rgbColor)}}</a>
-                </div>            
-    
-                <div class="sliders">
-                    <div class="slider-block">
-                        <a>R</a><input type="range" min="0" max="255" class="slider" [(ngModel)] = "rgbColors[i].red">
-                    </div>
-                    <div class="slider-block">
-                        <a>G</a><input type="range" min="0" max="255" class="slider" [(ngModel)] = "rgbColors[i].green">
-                    </div>
-                    <div class="slider-block">
-                        <a>B</a><input type="range" min="0" max="255" class="slider" [(ngModel)] = "rgbColors[i].blue">
-                    </div>
-                </div>                
+                </div>   
             </div>
-        </div>       
+        </div>   
+        <vertical-palette-bar [rgbColors] = "rgbColors"  [modelType] = "modelType" (onChangeEvent)="changeColors($event)"  (onChangeModelEvent) = "changeModelType($event)"></vertical-palette-bar>    
     </div>
-
-    <div class="button-line">
-        <select [(ngModel)] ="modelType" (change)="onModelChange()">
-            <option *ngFor="let schema of colorSchemes" [value]="schema">{{schema}} </option>
-        </select>
-        <button (click) = "updateColors()">Применить</button>
-        <img src="assets/reset.png" (click)="reset()">
-        <button (click) = "openSave()" style="margin-left: calc(50% - 520px);">Сохранить</button>
-    </div>    
-    
 </div>
-<save-block [isVisible]="isSave" [palette]="palette" (isVisibleEvent)="closeSave()"></save-block>
-

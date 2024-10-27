@@ -12,7 +12,6 @@ import { Tag } from '../../models/tag';
   styleUrl: './save-block.component.scss'
 })
 export class SaveBlockComponent {
-  @Input() isVisible = false
   @Output() isVisibleEvent = new EventEmitter()
   @Input() palette: Palette = {    
     name: "",

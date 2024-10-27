@@ -42,59 +42,24 @@ function RGBtoHEX(rgbColor: RGBColor): string {
 export class ColorWheelComponent  {
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
 
-  private ctx: CanvasRenderingContext2D | null = null
-
-  isSave: boolean = false
-
-  palette: Palette = {    
-    name: "",
-    private: true,
-    modelType: "монохроматическая",
-    tags: [],
-    colorInPalettes: []
-  }
+  private ctx: CanvasRenderingContext2D | null = null  
 
   modelType: string = "монохроматическая"
-  closed: boolean[] = []
-  colorSchemes: string[] = ['монохроматическая', 'последовательная', 'комплиментарная', 'сплит-комплиментарная']
   
-  @Input()rgbColors: RGBColor[] = []
+  rgbColors: RGBColor[] = []
 
-  defaultColors: Record<string, RGBColor[]> = {
-    'монохроматическая': [
-      { red: 204, green: 82, blue: 82 },
-      { red: 255, green: 51, blue: 51 },
-      { red: 255, green: 0, blue: 0 },
-      { red: 204, green: 102, blue: 102 },
-      { red: 51, green: 31, blue: 31 }
-    ],
-    'последовательная': [
-      { red: 46, green: 230, blue: 61 },
-      { red: 46, green: 230, blue: 138 },
-      { red: 46, green: 230, blue: 214 },
-      { red: 46, green: 168, blue: 230 },
-      { red: 46, green: 92, blue: 230 }
-    ],
-    'комплиментарная' : [
-      { red: 0, green: 250, blue: 250 },
-      { red: 55, green: 166, blue: 166 },
-      { red: 250, green: 0, blue: 0 },
-      { red: 186, green: 47, blue: 47 },
-      { red: 122, green: 61, blue: 61 }
-    ],
-    'сплит-комплиментарная': [
-      { red: 0, green: 250, blue: 125 },
-      { red: 0, green: 125, blue: 250 },
-      { red: 61, green: 92, blue: 122 },
-      { red: 250, green: 0, blue: 0 },
-      { red: 122, green: 61, blue: 61 }
-    ]
+  changeColors(colors:RGBColor[]) {
+    this.rgbColors = colors
+  }
+
+  changeModelType(type: string) {
+    this.modelType = type
   }
   
   constructor (
-    private styleService: StyleChangerService,
-    private httpService: HttpService
+    private styleService: StyleChangerService
   ) {}
+
   getCardStyle(color: RGBColor) {
     return {
       'background-color': `rgb(${color.red},${color.green},${color.blue})`
@@ -110,82 +75,14 @@ export class ColorWheelComponent  {
     return RGBtoHEX(rgbColor).toUpperCase()
   }
 
-  onModelChange() {
-    this.rgbColors = this.defaultColors[this.modelType]
-  }
   async ngOnInit() { 
-    this.rgbColors = this.defaultColors[this.modelType]
+    
     this.ctx = this.canvas.nativeElement.getContext('2d');
     if (this.ctx) {
       this.drawColorWheel()
     }
   }  
-
-  updateColors() {
-    let colorsInPalette: ColorInPalette[] = []
-    if (this.modelType == "монохроматическая") {
-      colorsInPalette.push({
-        hex: RGBtoHEX(this.rgbColors[3]),
-        colorRole: ""
-      })
-      colorsInPalette.push({
-        hex: RGBtoHEX(this.rgbColors[1]),
-        colorRole: ""
-      })
-      colorsInPalette.push({
-        hex: RGBtoHEX(this.rgbColors[2]),
-        colorRole: ""
-      })
-      colorsInPalette.push({
-        hex: RGBtoHEX(this.rgbColors[0]),
-        colorRole: ""
-      })
-      colorsInPalette.push({
-        hex: RGBtoHEX(this.rgbColors[4]),
-        colorRole: ""
-      })      
-    } else {
-      this.rgbColors.forEach(color => {
-        colorsInPalette.push({
-          hex: RGBtoHEX(color),
-          colorRole: ""
-        })
-      })      
-    }
   
-    this.styleService.setColors(colorsInPalette)
-    this.styleService.recolor()
-    console.log(this.isSave)
-  }
-
-  openSave() {
-    this.reset()
-
-    this.palette.modelType = this.modelType
-    this.palette.colorInPalettes = []
-    this.rgbColors.forEach(color =>{
-      this.palette.colorInPalettes.push({
-        hex: RGBtoHEX(color).toUpperCase(),
-        colorRole: ""
-      })
-    })
-    this.palette.colorInPalettes[0].colorRole = "Светлые тени"
-    this.palette.colorInPalettes[1].colorRole = "Светлый акцент"
-    this.palette.colorInPalettes[2].colorRole = "Главный цвет"
-    this.palette.colorInPalettes[3].colorRole = "Темный акцент"
-    this.palette.colorInPalettes[4].colorRole = "Темные тени"
-    this.isSave = !this.isSave
-  }
-
-  closeSave() {
-    this.isSave = !this.isSave
-  }
-
-  reset() {
-    this.styleService.reset()
-  }
-
-
   drop(event: CdkDragDrop<Tag[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -231,4 +128,6 @@ export class ColorWheelComponent  {
       }
     }
   }
+
+  
 }
