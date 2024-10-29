@@ -47,7 +47,7 @@ export class GenerateBlockSimpleComponent {
   } 
 
   getTextColor(hex: string) {    
-    let color = isColorDark(hex) ? 'var(--light_text)' : 'var(--dark_text)'
+    let color = isColorDark(hex) ? 'var(--reverse_text_color)' : 'var(--text_color)'
     return {'color': color}
   }
 

@@ -1,5 +1,4 @@
-$border_radius: 10px;
-$default_transition: 0.3s ease-in-out;
+
 
 .container {
     width: 100%;
@@ -35,7 +34,7 @@ $default_transition: 0.3s ease-in-out;
 .card .color {    
     width: 200px;
     height: 90px;
-    border-radius: $border_radius;
+    border-radius: var(--border_radius);
 }
 
 .card .color a {

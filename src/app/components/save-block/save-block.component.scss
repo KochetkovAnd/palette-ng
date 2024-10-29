@@ -1,7 +1,3 @@
-$border_radius: 10px;
-$default_transition: 0.3s ease-in-out;
-
-
 .back {
     width: 100%;
     height: 100%;
@@ -17,7 +13,7 @@ $default_transition: 0.3s ease-in-out;
     width: calc(100% - 200px);
     height: calc(100% - 100px);
     background-color: var(--light_shades);
-    border-radius: $border_radius;
+    border-radius: var(--border_radius);
     padding: 10px
 }
 
@@ -27,13 +23,13 @@ $default_transition: 0.3s ease-in-out;
     height: 40px;
     border: none;
     line-height: 20px;
-    border-radius: $border_radius;
+    border-radius: var(--border_radius);
     background-color: var(--light_accent);
     font-weight: 700;
 }
 
 .button-back:hover {
-    transition: $default_transition;
+    transition: var(--default_transition);
     background-color: var(--main_brand_color);
 }
 
@@ -53,7 +49,9 @@ $default_transition: 0.3s ease-in-out;
     width: calc(100% - 4px);
     height: 100px;
     margin: 2px;
-    border-radius: $border_radius;
+    border-radius: var(--border_radius);
+    box-shadow: 3px 3px 1px 1px var(--dark_shades);
+    border: 0.5px solid (--light_shades);
 }
 
 .save-color-line .block a {
@@ -64,7 +62,7 @@ $default_transition: 0.3s ease-in-out;
     text-align: center;
     font-size: 15px;
     font-weight: 700;
-    color: var(--dark_text);
+    color: var(--text_color);
 }
 
 .save-color-line .block .colorRole {
@@ -72,11 +70,11 @@ $default_transition: 0.3s ease-in-out;
     text-align: center;
     padding: 10px;
     width: calc(100% - 24px);
-    border-radius: $border_radius;
+    border-radius: var(--border_radius);
     border: none;
     outline: none;
     font-size: 15px;
-    color: var(--dark_text);
+    color: var(--text_color);
 }
 
 .save-block .paletteName {
@@ -85,12 +83,12 @@ $default_transition: 0.3s ease-in-out;
     line-height: 40px;
     height: 40px;
     width: calc(100% - 24px);
-    border-radius: $border_radius;
+    border-radius: var(--border_radius);
     border: none;
     outline: none;
     font-size: 20px;
     font-weight: 400;
-    color: var(--dark_text);
+    color: var(--text_color);
 }
 
 .save-block .tags {
@@ -106,7 +104,7 @@ $default_transition: 0.3s ease-in-out;
     width: 50%;
     height: 100%;
     font-size: 15px;
-    color: var(--dark_text);
+    color: var(--text_color);
 }
 
 .save-block .tags .tag a {
@@ -116,14 +114,14 @@ $default_transition: 0.3s ease-in-out;
     height: 20px;
     font-size: 15px;
     font-weight: 700;
-    color: var(--dark_text);
+    color: var(--text_color);
     cursor: default;
 }
 
 .save-block .tags .tag .tag-list {
     margin: 10px 40px;
     padding: 10px;
-    border-radius: $border_radius;
+    border-radius: var(--border_radius);
     width: calc(100% - 100px);
     height: calc(100% - 60px);
     box-shadow: 0px 0px 4px 4px rgba(0,0,0,0.25);
@@ -134,7 +132,7 @@ $default_transition: 0.3s ease-in-out;
 .tag-list .tag-item {
     padding: 5px;
     margin: 2px;
-    border-radius: $border_radius;
+    border-radius: var(--border_radius);
     box-shadow: 0px 0px 2px 2px rgba(0,0,0,0.25);
 }
 
@@ -153,6 +151,10 @@ $default_transition: 0.3s ease-in-out;
     width: 40%;
     height: 100%;
 }
+input {
+    background-color: var(--light_shades);
+    box-shadow: 2px 2px 1px 1px var(--dark_shades);
+}
 
 .right-side .switch-block {
     width: 100%;
@@ -168,7 +170,7 @@ $default_transition: 0.3s ease-in-out;
     line-height: 34px;
     margin-right: 10px;
     font-weight: 700;
-    color: var(--dark_text);
+    color: var(--text_color);
 }
 
 .right-side button {
@@ -176,15 +178,15 @@ $default_transition: 0.3s ease-in-out;
     margin: 10px 20%;
     height: 60px;
     border: none;
-    border-radius: $border_radius;
+    border-radius: var(--border_radius);
     background-color: var(--dark_shades);
     font-size: 15px;
     font-weight: 700;
-    color: var(--light_text);
+    color: var(--reverse_text_color);
 }
 
 .right-side button:hover {
-    transition: $default_transition;
+    transition: var(--default_transition);
     background-color: var(--dark_shades_hover);
 }
 
