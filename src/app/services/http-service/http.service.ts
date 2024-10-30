@@ -55,6 +55,11 @@ export class HttpService {
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   }
 
+  generateByModel() {
+    return this.http.get<ColorInPalette[]>(this.baseURL + "/color_in_palette/generate-by-model",
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
   //TAGS
 
   getAllTags() {

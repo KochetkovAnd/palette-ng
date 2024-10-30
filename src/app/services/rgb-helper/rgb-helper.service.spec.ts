@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-
-import { RgbHelperService } from '../../rgb-helper.service';
+import { RgbHelperService } from './rgb-helper.service';
 
 describe('RgbHelperService', () => {
   let service: RgbHelperService;

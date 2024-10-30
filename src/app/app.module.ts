@@ -24,6 +24,7 @@ import { SaveButtonComponent } from './components/save-button/save-button.compon
 import { HorizontalPaletteBarComponent } from './components/bars/horizontal-palette-bar/horizontal-palette-bar.component';
 import { VerticalPaletteBarComponent } from './components/bars/vertical-palette-bar/vertical-palette-bar.component';
 import { NavbarUserComponent } from './components/bars/navbar-user/navbar-user.component';
+import { GeneratePaletteAiPageComponent } from './pages/generate-palette-ai-page/generate-palette-ai-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { NavbarUserComponent } from './components/bars/navbar-user/navbar-user.c
     SaveButtonComponent,
     HorizontalPaletteBarComponent,
     VerticalPaletteBarComponent,
+    GeneratePaletteAiPageComponent,
   ],
   imports: [
     BrowserModule,

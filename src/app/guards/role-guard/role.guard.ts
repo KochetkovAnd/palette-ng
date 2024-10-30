@@ -24,6 +24,8 @@ class PermissionService {
           return isUser
         case 'generate_wheel_palette':
           return isUser
+        case 'generate_palette_ai':
+          return isUser
       }
     }
     this.router.navigate(['/login'])
