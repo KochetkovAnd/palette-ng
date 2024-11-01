@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HttpService } from '../../services/http-service/http.service';
-import { AuthService } from '../../services/auth-service/auth.service';
+import { HttpService } from '../../../services/http-service/http.service';
+import { AuthService } from '../../../services/auth-service/auth.service';
 import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 

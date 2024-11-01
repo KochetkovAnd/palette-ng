@@ -5,28 +5,27 @@ import { ColorInPalette } from '../../../models/colorInPalette';
 import { lastValueFrom } from 'rxjs';
 
 @Component({
-  selector: 'horizontal-palette-bar',
-  templateUrl: './horizontal-palette-bar.component.html',
-  styleUrl: './horizontal-palette-bar.component.scss'
+  selector: 'generate-block-ai-horizontal-bar',
+  templateUrl: './generate-block-ai-horizontal-bar.component.html',
+  styleUrl: './generate-block-ai-horizontal-bar.component.scss'
 })
-export class HorizontalPaletteBarComponent {
+export class GenerateBlockAiHorizontalBarComponent {
 
   constructor(
     private httpService: HttpService,
     private styleService: StyleChangerService
   ) {}
 
-  @Input() colorsInPalette: ColorInPalette[] = []
-  @Input() closed: boolean[] = []
+  @Input() colorsInPalette: ColorInPalette[] = [] 
   @Output() newColorsInPalette = new EventEmitter<ColorInPalette[]>()
 
-  async regenerate() {
-    for (let i = 0; i < this.closed.length; i++) {
-      if (!this.closed[i]) {
-        this.colorsInPalette[i].hex = ""
-      }
-    }
-    this.newColorsInPalette.emit(await lastValueFrom(this.httpService.generate(this.colorsInPalette, "monochrome")))        
+
+  async ngOnInit() {
+    this.regenerate()
+  }
+
+  async regenerate() {    
+    this.newColorsInPalette.emit(await lastValueFrom(this.httpService.generateByModel()))       
   }
 
   useSchema() {

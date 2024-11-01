@@ -1,0 +1,10 @@
+<div class="container">   
+    <div class="color-line">
+        <div class="color-block" *ngFor="let colorInPalette of colorsInPalette; let i = index">
+            <div class="color" [ngStyle]="{'background-color': '#' + colorInPalette.hex}">                
+                <a [ngStyle]="getTextColorByHex(colorInPalette.hex)">{{colorInPalette.hex}}</a>             
+            </div>
+        </div>
+    </div>   
+     <generate-block-ai-horizontal-bar [colorsInPalette] = "colorsInPalette" (newColorsInPalette)="refillColors($event)"></generate-block-ai-horizontal-bar>
+</div>

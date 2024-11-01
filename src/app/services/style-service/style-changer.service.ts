@@ -1,6 +1,6 @@
 import { ElementRef, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { ColorInPalette } from '../../models/colorInPalette';
-import { RgbHelperService } from '../rgb-helper/rgb-helper.service';
+import { Helper } from '../rgb-helper';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +8,7 @@ import { RgbHelperService } from '../rgb-helper/rgb-helper.service';
 
 export class StyleChangerService {
 
-  constructor(
-    private rgbHelper: RgbHelperService
-  ) { }
+  constructor() { }
 
 
   // Стандартные значения
@@ -49,43 +47,52 @@ export class StyleChangerService {
     this.dark_accent = colorInPalettes[3].hex
     this.dark_shades = colorInPalettes[4].hex
 
-    let light_shadesRGB = this.rgbHelper.HEXtoRGB(colorInPalettes[0].hex)
-    let main_colorRGB = this.rgbHelper.HEXtoRGB(colorInPalettes[2].hex)
-    let dark_shadesRGB = this.rgbHelper.HEXtoRGB(colorInPalettes[4].hex)
+    let light_shadesRGB = Helper.HEXtoRGB(colorInPalettes[0].hex)
+    let main_colorRGB = Helper.HEXtoRGB(colorInPalettes[2].hex)
+    let dark_shadesRGB = Helper.HEXtoRGB(colorInPalettes[4].hex)
 
-    this.main_brand_color_hover = this.rgbHelper.RGBtoHEX({
-      red: this.rgbHelper.clip(main_colorRGB.red - 5),
-      green: this.rgbHelper.clip(main_colorRGB.green - 5),
-      blue: this.rgbHelper.clip(main_colorRGB.blue - 5),
+    this.main_brand_color_hover = Helper.RGBtoHEX({
+      red: Helper.clip(main_colorRGB.red - 5),
+      green: Helper.clip(main_colorRGB.green - 5),
+      blue: Helper.clip(main_colorRGB.blue - 5),
     })
 
-    if (this.rgbHelper.isColorDark(dark_shadesRGB)) {
-      this.text_color = this.dark_text_color
-      this.reverse_text_color = this.light_text_color
-      this.dark_shades_hover = this.rgbHelper.RGBtoHEX({
+    if (Helper.isColorDark(dark_shadesRGB)) {
+      this.dark_shades_hover = Helper.RGBtoHEX({
         red: dark_shadesRGB.red + 10,
         green: dark_shadesRGB.green + 10,
         blue: dark_shadesRGB.blue + 10,
       })
-      this.light_shades_hover = this.rgbHelper.RGBtoHEX({
+      this.light_shades_hover = Helper.RGBtoHEX({
         red: light_shadesRGB.red - 10,
         green: light_shadesRGB.green - 10,
         blue: light_shadesRGB.blue - 10,
       })
     } else {
-      this.text_color = this.light_text_color
-      this.reverse_text_color = this.dark_text_color
-      this.dark_shades_hover = this.rgbHelper.RGBtoHEX({
+      this.dark_shades_hover = Helper.RGBtoHEX({
         red: dark_shadesRGB.red - 10,
         green: dark_shadesRGB.green - 10,
         blue: dark_shadesRGB.blue - 10,
       })
-      this.light_shades_hover = this.rgbHelper.RGBtoHEX({
+      this.light_shades_hover = Helper.RGBtoHEX({
         red: light_shadesRGB.red + 10,
         green: light_shadesRGB.green + 10,
         blue: light_shadesRGB.blue + 10,
       })
-    }   
+    }  
+    
+    if (Helper.isColorDark(dark_shadesRGB)) {
+      this.reverse_text_color = this.light_text_color
+    } else {
+      this.reverse_text_color = this.dark_text_color
+    }
+
+    if (Helper.isColorDark(light_shadesRGB)) {
+      this.text_color = this.light_text_color
+    } else {
+      this.text_color = this.dark_text_color
+    }
+
   }
 
   recolor() {

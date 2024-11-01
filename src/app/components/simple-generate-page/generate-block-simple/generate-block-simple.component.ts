@@ -1,25 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { HttpService } from '../../services/http-service/http.service';
-import { StyleChangerService } from '../../services/style-service/style-changer.service';
-import { ColorInPalette } from '../../models/colorInPalette';
+import { HttpService } from '../../../services/http-service/http.service';
+import { ColorInPalette } from '../../../models/colorInPalette';
 import { lastValueFrom } from 'rxjs';
-import { Palette } from '../../models/palette';
 
-function isColorDark(color:string): boolean {
-  const brightness = calculateBrightness(color);
-  return brightness < 100;
-}
-function calculateBrightness(color: string): number {
-  const rgb = HEXtoRGB(color);
-  return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
-}
-function HEXtoRGB(hex:string): {r: number, g: number, b: number} {
-  const bigint = parseInt(hex, 16);
-  const r = (bigint >> 16) & 255;
-  const g = (bigint >> 8) & 255;
-  const b = bigint & 255;    
-  return { r, g, b };
-}
+import { Helper } from '../../../services/rgb-helper';
+
 
 @Component({
   selector: 'generate-block-simple',
@@ -47,8 +32,7 @@ export class GenerateBlockSimpleComponent {
   } 
 
   getTextColor(hex: string) {    
-    let color = isColorDark(hex) ? 'var(--reverse_text_color)' : 'var(--text_color)'
-    return {'color': color}
+    return Helper.getTextColorByHex(hex)
   }
 
   change(i: number) {

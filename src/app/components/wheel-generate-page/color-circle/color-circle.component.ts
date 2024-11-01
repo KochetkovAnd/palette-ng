@@ -1,87 +1,8 @@
 import { CdkDragEnd, CdkDragMove, CdkDragStart } from '@angular/cdk/drag-drop';
 import { Component, Input, DoCheck } from '@angular/core';
-import { HSBColor } from '../../models/colors/hsbColor';
-import { RGBColor } from '../../models/colors/rgbColor';
-import { ColorInPalette } from '../../models/colorInPalette';
-
-
-function HSBtoRGB(hsbColor: HSBColor): RGBColor{
-  let h = hsbColor.hue 
-  let s = hsbColor.saturation / 100
-  let br = hsbColor.brightness / 100
-
-  const c = br * s
-  const x = c * (1 - Math.abs((h / 60) % 2 - 1));
-  const m = br - c;
-
-  let r, g, b;
-  if (0 <= h && h < 60) {
-    [r, g, b] = [c, x, 0];
-  } else if (60 <= h && h < 120) {
-    [r, g, b] = [x, c, 0];
-  } else if (120 <= h && h < 180) {
-    [r, g, b] = [0, c, x];
-  } else if (180 <= h && h < 240) {
-    [r, g, b] = [0, x, c];
-  } else if (240 <= h && h < 300) {
-    [r, g, b] = [x, 0, c];
-  } else {
-    [r, g, b] = [c, 0, x];
-  }
-  return  {
-    red: Math.round((r + m) * 255),
-    green: Math.round((g + m) * 255),
-    blue: Math.round((b + m) * 255)
-  }
-
-}
-
-function RGBToHSB(rgbColor: RGBColor): HSBColor {
-  let r = rgbColor.red / 255;
-  let g = rgbColor.green / 255;
-  let b = rgbColor.blue / 255;
-
-  const max = Math.max(r, g, b);
-  const min = Math.min(r, g, b);
-  const delta = max - min;
-
-  let h = 0, s = 0, br = 0;
-  
-  if (delta === 0) {
-    h = 0;
-  } else if (max === r) {
-    h = ((g - b) / delta) % 6;
-  } else if (max === g) {
-    h = (b - r) / delta + 2;
-  } else {
-    h = (r - g) / delta + 4;
-  }
-
-  h = Math.round((h * 60 + 360) % 360);
-
-  s = max === 0 ? 0 : delta / max;
-  br = max;
-  s *= 100;
-  br *= 100;
-
-  return { hue:h, saturation:s, brightness:br };
-}
-
-function HEXtoRGB(hex: string): RGBColor {
-  const bigint = parseInt(hex, 16);
-  const red = (bigint >> 16) & 255;
-  const green = (bigint >> 8) & 255;
-  const blue = bigint & 255;
-  return {red, green, blue}
-}
-
-function RGBtoHEX(rgbColor: RGBColor): string {
-  const hexR = rgbColor.red.toString(16).padStart(2, '0');
-  const hexG = rgbColor.green.toString(16).padStart(2, '0');
-  const hexB = rgbColor.blue.toString(16).padStart(2, '0');
-
-  return `${hexR}${hexG}${hexB}`;
-}
+import { Helper } from '../../../services/rgb-helper';
+import { HSBColor } from '../../../models/colors/hsbColor';
+import { RGBColor } from '../../../models/colors/rgbColor';
 
 function clip(x:number) {
   if (x > 100) {
@@ -138,7 +59,7 @@ export class ColorCircleComponent implements DoCheck {
 
   ngDoCheck() {
     if (!this.isDragging) {
-      this.backColor = RGBToHSB(this.rgbColors[this.i])
+      this.backColor = Helper.RGBToHSB(this.rgbColors[this.i])
       this.setBlockPositionFromHSL(this.backColor.hue, this.backColor.saturation, this.backColor.brightness)  
       let hsbColor = this.getHSBcolorByPosition(this.blockPosition.x, this.blockPosition.y)    
       this.setHSLColor(hsbColor)
@@ -182,7 +103,7 @@ export class ColorCircleComponent implements DoCheck {
   
 
   setHSLColor(hsbColor: HSBColor) {
-    let color = HSBtoRGB(hsbColor)
+    let color = Helper.HSBtoRGB(hsbColor)
     this.rgbColors[this.i].red = color.red
     this.rgbColors[this.i].blue = color.blue
     this.rgbColors[this.i].green = color.green 
@@ -212,10 +133,10 @@ export class ColorCircleComponent implements DoCheck {
     if (this.colorSchema == "монохроматическая") {
       for (let j = 0; j < 5; j++) {
         if (j!= this.i) {
-          let color = RGBToHSB(colors[j])
+          let color = Helper.RGBToHSB(colors[j])
           color.hue = newHsb.hue          
           color.saturation = this.i == 2 ? clip(color.saturation * dif_satuturation) : color.saturation
-          let rgbColor = HSBtoRGB(color)  
+          let rgbColor = Helper.HSBtoRGB(color)  
           colors[j].red = rgbColor.red
           colors[j].green = rgbColor.green
           colors[j].blue = rgbColor.blue        
@@ -225,10 +146,10 @@ export class ColorCircleComponent implements DoCheck {
       let mainHue = clipHue(newHsb.hue + (2-this.i) * 25)
       for (let j = 0; j < 5; j++) {
         if (j!= this.i) {
-          let color = RGBToHSB(colors[j])
+          let color = Helper.RGBToHSB(colors[j])
           color.hue = clipHue(mainHue - (2 - j) * 25)     
           color.saturation = this.i == 2 ? clip(color.saturation * dif_satuturation) : color.saturation
-          let rgbColor = HSBtoRGB(color)  
+          let rgbColor = Helper.HSBtoRGB(color)  
           colors[j].red = rgbColor.red
           colors[j].green = rgbColor.green
           colors[j].blue = rgbColor.blue        
@@ -239,10 +160,10 @@ export class ColorCircleComponent implements DoCheck {
          
       for (let j = 0; j < 5; j++) {        
         if (j!= this.i) {
-          let color = RGBToHSB(colors[j])
+          let color = Helper.RGBToHSB(colors[j])
           color.hue = j >= 2 ? mainHue : clipHue(mainHue - 180)          
           color.saturation = this.i == 2 ? clip(color.saturation * dif_satuturation) : color.saturation
-          let rgbColor = HSBtoRGB(color)  
+          let rgbColor = Helper.HSBtoRGB(color)  
           colors[j].red = rgbColor.red
           colors[j].green = rgbColor.green
           colors[j].blue = rgbColor.blue        
@@ -259,7 +180,7 @@ export class ColorCircleComponent implements DoCheck {
       }
       for (let j = 0; j < 5; j++) {
         if (j!= this.i) {
-          let color = RGBToHSB(colors[j])
+          let color = Helper.RGBToHSB(colors[j])
           if (j >= 3) {
             color.hue = mainHue
           } else if (j >= 1) {
@@ -268,7 +189,7 @@ export class ColorCircleComponent implements DoCheck {
             color.hue = clipHue(mainHue + 150)
           }
           color.saturation = this.i == 3 ? clip(color.saturation * dif_satuturation) : color.saturation
-          let rgbColor = HSBtoRGB(color)  
+          let rgbColor = Helper.HSBtoRGB(color)  
           colors[j].red = rgbColor.red
           colors[j].green = rgbColor.green
           colors[j].blue = rgbColor.blue        

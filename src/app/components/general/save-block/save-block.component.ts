@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
-import { Palette } from '../../models/palette';
-import { StyleChangerService } from '../../services/style-service/style-changer.service';
-import { HttpService } from '../../services/http-service/http.service';
+import { Palette } from '../../../models/palette';
+import { StyleChangerService } from '../../../services/style-service/style-changer.service';
+import { HttpService } from '../../../services/http-service/http.service';
 import { lastValueFrom } from 'rxjs';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Tag } from '../../models/tag';
+import { Tag } from '../../../models/tag';
 
 @Component({
   selector: 'save-block',

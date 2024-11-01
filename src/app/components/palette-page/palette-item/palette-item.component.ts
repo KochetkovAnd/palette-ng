@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Palette } from '../../models/palette';
-import { ColorInPalette } from '../../models/colorInPalette';
+import { Palette } from '../../../models/palette';
+import { ColorInPalette } from '../../../models/colorInPalette';
+import { Helper } from '../../../services/rgb-helper';
 
 @Component({
   selector: 'palette-item',
@@ -57,26 +58,7 @@ export class PaletteItemComponent {
     return {}    
   }
 
-  isColorDark(color:string): boolean {
-    const brightness = this.calculateBrightness(color);
-    return brightness < 100;
-  }
-
-  private calculateBrightness(color: string): number {
-    const rgb = this.HEXtoRGB(color);
-    return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
-  }
-
-  private HEXtoRGB(hex:string): {r: number, g: number, b: number} {
-    const bigint = parseInt(hex, 16);
-    const r = (bigint >> 16) & 255;
-    const g = (bigint >> 8) & 255;
-    const b = bigint & 255;    
-    return { r, g, b };
-  }
-
   getTextColor(hex: string) {    
-    let color = this.isColorDark(hex) ? 'white' : 'black'
-    return {'color': color}
+    return Helper.getTextColorByHex(hex)
   }
 }

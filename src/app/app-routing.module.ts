@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginBlockComponent } from './components/login-block/login-block.component';
+import { LoginBlockComponent } from './components/general/login-block/login-block.component';
 import { PalettePageComponent } from './pages/palette-page/palette-page.component';
 import { roleGuard } from './guards/role-guard/role.guard';
 import { GeneratePalettePageComponent } from './pages/generate-palette-page/generate-palette-page.component';
