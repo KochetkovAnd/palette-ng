@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Palette } from '../../models/palette';
-import { ColorInPalette } from '../../models/colorInPalette';
+import { Palette } from '../../../models/palette';
+import { ColorInPalette } from '../../../models/colorInPalette';
 
 @Component({
   selector: 'save-button',

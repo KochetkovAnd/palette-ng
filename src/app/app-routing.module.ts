@@ -6,6 +6,7 @@ import { roleGuard } from './guards/role-guard/role.guard';
 import { GeneratePalettePageComponent } from './pages/generate-palette-page/generate-palette-page.component';
 import { GenerateWheelPalettePageComponent } from './pages/generate-wheel-palette-page/generate-wheel-palette-page.component';
 import { GeneratePaletteAiPageComponent } from './pages/generate-palette-ai-page/generate-palette-ai-page.component';
+import { PicturePalettePageComponent } from './pages/picture-palette-page/picture-palette-page.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,11 @@ const routes: Routes = [
     path: "generate_palette_ai",
     canActivate: [roleGuard],
     component: GeneratePaletteAiPageComponent
+  },
+  {
+    path: "picture_palette",
+    canActivate: [roleGuard],
+    component: PicturePalettePageComponent
   },
   {
     path: "generate_wheel_palette",

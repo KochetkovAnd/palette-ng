@@ -20,7 +20,7 @@ import { ColorWheelComponent } from './components/wheel-generate-page/color-whee
 import { ColorDescriptionBlockComponent } from './components/color-description-block/color-description-block.component';
 import { GenerateWheelPalettePageComponent } from './pages/generate-wheel-palette-page/generate-wheel-palette-page.component';
 import { SaveBlockComponent } from './components/general/save-block/save-block.component';
-import { SaveButtonComponent } from './components/save-button/save-button.component';
+import { SaveButtonComponent } from './components/general/save-button/save-button.component';
 import { HorizontalPaletteBarComponent } from './components/simple-generate-page/horizontal-palette-bar/horizontal-palette-bar.component';
 import { VerticalPaletteBarComponent } from './components/wheel-generate-page/vertical-palette-bar/vertical-palette-bar.component';
 import { NavbarUserComponent } from './components/general/navbar-user/navbar-user.component';
@@ -28,6 +28,8 @@ import { GeneratePaletteAiPageComponent } from './pages/generate-palette-ai-page
 import { GenerateBlockAiComponent } from './components/ai-generate-page/generate-block-ai/generate-block-ai.component';
 import { GenerateBlockAiHorizontalBarComponent } from './components/ai-generate-page/generate-block-ai-horizontal-bar/generate-block-ai-horizontal-bar.component';
 import { ColorCircleComponent } from './components/wheel-generate-page/color-circle/color-circle.component';
+import { PicturePalettePageComponent } from './pages/picture-palette-page/picture-palette-page.component';
+import { PictureGenerateComponent } from './components/picture-generate-page/picture-generate/picture-generate.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { ColorCircleComponent } from './components/wheel-generate-page/color-cir
     GeneratePaletteAiPageComponent,
     GenerateBlockAiComponent,
     GenerateBlockAiHorizontalBarComponent,
+    PicturePalettePageComponent,
+    PictureGenerateComponent,
   ],
   imports: [
     BrowserModule,
