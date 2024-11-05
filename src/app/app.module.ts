@@ -30,6 +30,8 @@ import { GenerateBlockAiHorizontalBarComponent } from './components/ai-generate-
 import { ColorCircleComponent } from './components/wheel-generate-page/color-circle/color-circle.component';
 import { PicturePalettePageComponent } from './pages/picture-palette-page/picture-palette-page.component';
 import { PictureGenerateComponent } from './components/picture-generate-page/picture-generate/picture-generate.component';
+import { PictureColorBlockComponent } from './components/picture-generate-page/picture-color-block/picture-color-block.component';
+import { PicturePaletteBarComponent } from './components/picture-generate-page/picture-palette-bar/picture-palette-bar.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { PictureGenerateComponent } from './components/picture-generate-page/pic
     GenerateBlockAiHorizontalBarComponent,
     PicturePalettePageComponent,
     PictureGenerateComponent,
+    PictureColorBlockComponent,
+    PicturePaletteBarComponent,
   ],
   imports: [
     BrowserModule,

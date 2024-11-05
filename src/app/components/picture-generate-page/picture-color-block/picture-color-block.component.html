@@ -1,0 +1,13 @@
+<!--<div class="color-line">
+     <div class="card" *ngFor="let rgbColor of rgbColors; let i = index">
+        <div class="color" [ngStyle]="getCardStyle(rgbColor)">
+            <a [ngStyle]="getTextColor(rgbColor)"> #{{getHEX(rgbColor)}}</a>
+        </div>   
+    </div>
+</div>    -->
+
+<div class="container">
+    <div *ngFor="let color of colors" class="color" [ngStyle]="getCardStyle(color)">
+        <a [ngStyle]="getTextColor(color)"> #{{color}}</a>
+    </div>    
+</div>

@@ -60,6 +60,12 @@ export class HttpService {
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   }
 
+
+  generateByPicture(formData : FormData) {
+    return this.http.post<string[]>(this.baseURL + "/color_in_palette/generate-by-picture", formData,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
   //TAGS
 
   getAllTags() {

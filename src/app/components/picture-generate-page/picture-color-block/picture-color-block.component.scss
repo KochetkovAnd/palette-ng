@@ -1,0 +1,21 @@
+.container {
+    width: 220px;
+    height: calc(100% - 100px);
+    margin: 60px 0px 40px 0px;
+}
+
+.color {
+    width: 200px;
+    height: 90px;
+    margin: 10px;
+    border-radius: var(--border_radius);
+}
+
+.color a {
+    display: block;
+    text-align: center;
+    line-height: 90px;
+    font-size: 15px;
+    cursor: default;
+    font-weight: bold;
+}
