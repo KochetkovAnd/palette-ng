@@ -35,7 +35,7 @@ export class ColorWheelComponent  {
   }
 
   getTextColor(rgbcolor: RGBColor) {
-    let color = Helper.isColorDark(rgbcolor) ? 'var(--text_color)' : 'var(--reverse_text_color)'
+    let color = Helper.isColorDark(rgbcolor) ? 'var(--reverse_text_color)' : 'var(--text_color)'
     return { 'color': color }
   }
 

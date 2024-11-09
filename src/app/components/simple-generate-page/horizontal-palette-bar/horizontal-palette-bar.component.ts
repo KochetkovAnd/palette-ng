@@ -37,4 +37,16 @@ export class HorizontalPaletteBarComponent {
   reset() {
     this.styleService.reset()
   }
+
+  reverse() {
+    this.swap(0,4)
+    this.swap(1,3)
+    this.newColorsInPalette.emit(this.colorsInPalette)
+  }
+
+  swap(first: number, second: number) {
+    let c =  this.colorsInPalette[first]
+    this.colorsInPalette[first] = this.colorsInPalette[second]
+    this.colorsInPalette[second] = c
+  }
 }

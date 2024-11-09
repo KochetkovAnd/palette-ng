@@ -60,4 +60,16 @@ export class PicturePaletteBarComponent {
     formData.append('file', file, file.name);
     this.newColors.emit(await lastValueFrom(this.httpService.generateByPicture(formData)))
   }
+
+  reverse() {
+    this.swap(0,4)
+    this.swap(1,3)
+    this.newColors.emit(this.colors)
+  }
+
+  swap(first: number, second: number) {
+    let c =  this.colors[first]
+    this.colors[first] = this.colors[second]
+    this.colors[second] = c
+  }
 }
